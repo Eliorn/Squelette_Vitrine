@@ -1,0 +1,4 @@
+services:
+#    pr_vitrine.example:
+#        class: PR\VitrineBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
