@@ -1,3 +1,15 @@
 accueil:
     path: /
     defaults: { _controller: PRVitrineBundle:Vitrine:index }
+
+gallerie:
+    path: /gallerie
+    defaults: { _controller: PRVitrineBundle:Vitrine:gallerie }
+
+contacts:
+    path: /contacts
+    defaults: { _controller: PRVitrineBundle:Vitrine:contacts }
+
+presentation:
+    path: /presentation
+    defaults: { _controller: PRVitrineBundle:Vitrine:presentation }

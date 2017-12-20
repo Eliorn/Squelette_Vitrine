@@ -1,0 +1,15 @@
+{% extends "::layout-default.html.twig" %}
+
+{% block title %}Accueil{% endblock %}
+{% block head %}
+    {{ parent() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block body %}
+    <h1>Accueil</h1>
+    <p class="important">
+        Welcome on my awesome homepage.
+    </p>
+{% endblock %}

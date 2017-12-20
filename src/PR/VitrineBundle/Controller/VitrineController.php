@@ -12,7 +12,28 @@ class VitrineController extends Controller
 {
   public function indexAction()
   {
-    $content = $this->get('templating')->render('PRVitrineBundle:Vitrine:layout.html.twig');
+    $content = $this->get('templating')->render('PRVitrineBundle:Vitrine:accueil.html.twig');
+
+    return new Response($content);
+  }
+
+  public function gallerieAction()
+  {
+    $content = $this->get('templating')->render('PRVitrineBundle:Vitrine:gallerie.html.twig');
+
+    return new Response($content);
+  }
+
+  public function contactsAction()
+  {
+    $content = $this->get('templating')->render('PRVitrineBundle:Vitrine:contacts.html.twig');
+
+    return new Response($content);
+  }
+
+  public function presentationAction()
+  {
+    $content = $this->get('templating')->render('PRVitrineBundle:Vitrine:presentation.html.twig');
 
     return new Response($content);
   }
