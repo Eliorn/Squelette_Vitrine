@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Site Vitrine {% endblock %}</title>
-    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-</head>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }} ">
 
+</head>
 <body>
 <div class="container-fluid">
     <div id="header" class="jumbotron">
@@ -16,22 +15,38 @@
           Page d'accueil
         </p>
     </div>
-
     <div class="row">
         <div class="col-md-12">
-            <p style="text-align:right;">Bienvenue</p>
+            <p style="text-align:right;">
+              Hello
+            </p>
+        </div>
+
+        {% if app.request.hasPreviousSession %}
+            {% for type, messages in app.session.flashBag.all %}
+                {% for message in messages %}
+                    <div class="{{ type }}">
+                        {{ message|trans({}, 'FOSUserBundle') }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+
+        <div>
+            {% block fos_user_content %}
+            {% endblock fos_user_content %}
+        </div></p>
         </div>
     </div>
     <hr/>
-
     <div class="row">
         <div id="menu" class="col-md-3">
             <h3>Menu Principal</h3>
-            <ul class="nav nav-stacked">
-                <li><a href="{{ path('accueil') }}"><i class="fa fa-home fa-lg" aria-hidden="true"></i> Accueil </a></li>
-                <li><a href="{{ path('presentation') }}"><i class="fa fa-binoculars" aria-hidden="true"></i> Presentation </a></li>
-                <li><a href="{{ path('gallerie') }}"><i class="fa fa-cog fa-lg" aria-hidden="true"></i> Gallerie </a></li>
-                <li><a href="{{ path('contacts') }}"><i class="fa fa-cog fa-lg" aria-hidden="true"></i> Contacts </a></li>
+            <ul class="nav flex-column ">
+                <li><a class="nav-item" href="{{ path('accueil') }}"><i class="fas fa-home" aria-hidden="true"></i> Accueil </a></li>
+                <li><a class="nav-item" href="{{ path('presentation') }}"><i class="fas fa-binoculars" aria-hidden="true"></i> Présentation </a></li>
+                <li><a class="nav-item" href="{{ path('gallerie') }}"><i class="fas fa-cog" aria-hidden="true"></i> Gallerie </a></li>
+                <li><a class="nav-item" href="{{ path('contacts') }}"><i class="fas fa-cog" aria-hidden="true"></i> Contacts </a></li>
             </ul>
         </div>
         <div id="content" class="col-md-9">
@@ -43,13 +58,15 @@
     <hr>
 
     <footer>
-        <p>Copyright {{ "now"|date('Y') }} - Pierre Roumieux</p>
+        <p style="text-align:center;">Copyright {{ "now"|date('Y') }} - Pierre Roumieux</p>
     </footer>
 </div>
 
 {% block javascripts %}
-<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('css/FontAwesome/svg-with-js/js/fontawesome-all.min.js') }}"></script>
 <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+<script src="{{ asset('js/popper.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
 {% endblock %}
 </body>
