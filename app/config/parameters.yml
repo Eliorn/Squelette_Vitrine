@@ -1,0 +1,12 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 127.0.0.1
+    database_port: 3306
+    database_name: vitrine
+    database_user: vitrine
+    database_password: vitrine@pass
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: contact@vitrine.fr
+    mailer_password: null
+    secret: b57a045470d125fc57d9350b18598043c1d63ac4
