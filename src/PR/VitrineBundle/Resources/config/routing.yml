@@ -10,6 +10,10 @@ contacts:
     path: /contacts
     defaults: { _controller: PRVitrineBundle:Vitrine:contacts }
 
-presentation:
-    path: /presentation
-    defaults: { _controller: PRVitrineBundle:Vitrine:presentation }
+upload:
+    path: /upload
+    defaults: { _controller: PRVitrineBundle:Vitrine:upload }
+
+carousel:
+    path: /carousel
+    defaults: { _controller: PRVitrineBundle:Vitrine:carousel }

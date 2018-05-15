@@ -1,74 +1,275 @@
 <!DOCTYPE html>
-<html lang="fr">
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}Site Vitrine {% endblock %}</title>
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }} ">
-
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>{% block title %} Sandbox {% endblock %}</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="stylesheet" href="{{asset('AdminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{{asset('AdminLTE/bower_components/font-awesome/css/font-awesome.min.css')}}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="{{asset('AdminLTE/bower_components/Ionicons/css/ionicons.min.css')}}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{asset('AdminLTE/dist/css/AdminLTE.min.css')}}">
+  <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+        page. However, you can choose any other skin. Make sure you
+        apply the skin class to the body tag so the changes take effect. -->
+  <link rel="stylesheet" href="{{asset('AdminLTE/dist/css/skins/skin-blue.min.css')}}">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{{asset('AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}" type="text/css" />
+  <!--Select2 -->
+  <link rel="stylesheet" href="{{ asset('AdminLTE/bower_components/select2/dist/css/select2.min.css') }}" type="text/css" media="screen" />
+  <!-- Google Font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <!--CssAppli-->
+  <link rel="stylesheet" href="{{asset('css/front.css')}}">
+  <!--FavIcon-->
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
-<body>
-<div class="container-fluid">
-    <div id="header" class="jumbotron">
-        <h1>Site Vitrine</h1>
-        <p>
-          Page d'accueil
-        </p>
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+  <!-- Main Header -->
+  <header class="main-header">
+
+    <!-- Logo -->
+    <a href="{{ path('accueil') }}" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>PR</b></span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>P</b>rojet  <b>D</b>eployement</span>
+    </a>
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top" role="navigation">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+      <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+            <!-- User Account Menu -->
+          <li class="dropdown user user-menu">
+            <!-- Menu Toggle Button -->
+
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <!-- The user image in the navbar-->
+              <img src="{{ asset('images/LOGO.png') }} " class="user-image" alt="">
+              <!-- hidden-xs hides the username on small devices so only the image appears. -->
+              <span class="hidden-xs"> Bienvenue </span>
+              <span class="hidden-xs"> ! </span>
+
+            </a>
+
+          </li>
+          <!-- Control Sidebar Toggle Button -->
+          <li>
+            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel" style=''>
+        <div class="pull-left image">
+        Projet - Deploiement et Sandbox
+        </div>
+        <div class="pull-left info" style="left:0;">
+          Bienvenue !
+        </div>
+      </div>
+
+
+
+      <!-- Sidebar Menu -->
+      <ul class="sidebar-menu" data-widget="tree" style='color:white !important;'>
+        <li class="header">Menu</li>
+        <!-- Optionally, you can add icons to the links -->
+          <li><a class="nav-item" href="{{ path('accueil') }}"><i class="fa fa-home" aria-hidden="true"></i> Accueil </a></li>
+          <li class="treeview">
+          <li><a class="nav-item" href="{{ path('upload') }}"><i class="fa fa-server" aria-hidden="true"></i> Upload des fichers </a></li>
+          <li><a class="nav-item" href="{{ path('gallerie') }}"><i class="fa fa-binoculars" aria-hidden="true"></i> Visualision des fichiers </a></li>
+          <li><a class="nav-item" href="{{ path('carousel') }}"><i class="fa fa-binoculars" aria-hidden="true"></i> Gallerie photo </a></li>
+          <li><a class="nav-item" href="{{ path('contacts') }}"><i class="fa fa-envelope" aria-hidden="true"></i> Contacts </a></li>
+          <ul class="treeview-menu">
+
+
+          </ul>
+        </li>
+
+
+
+      </ul>
+      <!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        <small>Projet de site web - deploiement et sandbox</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i>Level</a></li>
+        <li class="active">Here</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content container-fluid">
+      {% block body %}
+
+      {% endblock %}
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <!-- To the right -->
+    <div class="pull-right hidden-xs">
+
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <p style="text-align:right;">
-              Hello
+    <!-- Default to the left -->
+    <strong>Copyright &copy; 2018 - Pierre Roumieux</strong>
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Create the tabs -->
+    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+
+      <!--<li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>-->
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <ul style='font-size:1.2em;color:white;'>
+      </ul>
+      <div class="tab-pane active" id="control-sidebar-home-tab">
+        <!--
+        <h3 class="control-sidebar-heading">Recent Activity</h3>
+        <ul class="control-sidebar-menu">
+          <li>
+            <a href="javascript:;">
+              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+
+                <p>Will be 23 on April 24th</p>
+              </div>
+            </a>
+          </li>
+        </ul>
+        -->
+        <!-- /.control-sidebar-menu -->
+        <!--
+        <h3 class="control-sidebar-heading">Tasks Progress</h3>
+        <ul class="control-sidebar-menu">
+          <li>
+            <a href="javascript:;">
+              <h4 class="control-sidebar-subheading">
+                Custom Template Design
+                <span class="pull-right-container">
+                    <span class="label label-danger pull-right">70%</span>
+                  </span>
+              </h4>
+
+              <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+              </div>
+            </a>
+          </li>
+        </ul>
+        -->
+        <!-- /.control-sidebar-menu -->
+
+      </div>
+      <!-- /.tab-pane -->
+      <!-- Stats tab content -->
+      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
+      <!-- /.tab-pane -->
+      <!-- Settings tab content -->
+      <div class="tab-pane" id="control-sidebar-settings-tab">
+        <form method="post">
+          <h3 class="control-sidebar-heading">General Settings</h3>
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Report panel usage
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+
+            <p>
+              Some information about this general settings option
             </p>
-        </div>
-
-        {% if app.request.hasPreviousSession %}
-            {% for type, messages in app.session.flashBag.all %}
-                {% for message in messages %}
-                    <div class="{{ type }}">
-                        {{ message|trans({}, 'FOSUserBundle') }}
-                    </div>
-                {% endfor %}
-            {% endfor %}
-        {% endif %}
-
-        <div>
-            {% block fos_user_content %}
-            {% endblock fos_user_content %}
-        </div></p>
-        </div>
+          </div>
+          <!-- /.form-group -->
+        </form>
+      </div>
+      <!-- /.tab-pane -->
     </div>
-    <hr/>
-    <div class="row">
-        <div id="menu" class="col-md-3">
-            <h3>Menu Principal</h3>
-            <ul class="nav flex-column ">
-                <li><a class="nav-item" href="{{ path('accueil') }}"><i class="fas fa-home" aria-hidden="true"></i> Accueil </a></li>
-                <li><a class="nav-item" href="{{ path('presentation') }}"><i class="fas fa-binoculars" aria-hidden="true"></i> Présentation </a></li>
-                <li><a class="nav-item" href="{{ path('gallerie') }}"><i class="fas fa-cog" aria-hidden="true"></i> Gallerie </a></li>
-                <li><a class="nav-item" href="{{ path('contacts') }}"><i class="fas fa-cog" aria-hidden="true"></i> Contacts </a></li>
-            </ul>
-        </div>
-        <div id="content" class="col-md-9">
-          
-            {% block body %}
-            {% endblock %}
-        </div>
-    </div>
-
-    <hr>
-
-    <footer>
-        <p style="text-align:center;">Copyright {{ "now"|date('Y') }} - Pierre Roumieux</p>
-    </footer>
+  </aside>
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+  immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
 </div>
+<!-- ./wrapper -->
 
-{% block javascripts %}
-<script src="{{ asset('css/FontAwesome/svg-with-js/js/fontawesome-all.min.js') }}"></script>
-<script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
-<script src="{{ asset('js/popper.js') }}"></script>
-<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<!-- REQUIRED JS SCRIPTS -->
 
-{% endblock %}
+<!-- jQuery 3 -->
+<script type="text/javascript" src="{{asset('AdminLTE/bower_components/jquery/dist/jquery.min.js')}}"></script>
+<!-- jQuery UI -->
+<script type="text/javascript" src="{{asset('AdminLTE/bower_components/jquery-ui/jquery-ui.min.js')}}"></script>
+<!-- Bootstrap 3.3.7 -->
+<script type="text/javascript" src="{{asset('AdminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+
+<script type="text/javascript" src="{{asset('AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
+<!-- SlimScroll -->
+<script type="text/javascript" src="{{asset('AdminLTE/bower_components/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
+<!-- FastClick -->
+<script type="text/javascript" src="{{asset('AdminLTE/bower_components/fastclick/lib/fastclick.js')}}"></script>
+
+<!-- Select Picker-->
+<script type="text/javascript" src="{{asset('AdminLTE/bower_components/select2/dist/js/select2.full.min.js')}}"></script>
+<!-- AdminLTE App -->
+<script type="text/javascript" src="{{asset('AdminLTE/dist/js/adminlte.min.js')}}"></script>
+
+<!-- Routing JS
+
+-->
+<!-- File Upload JS-->
+<script type="text/javascript" src="{{asset('jQuery-File-Upload-9.21.0/js/jquery.ui.widget.js')}}"></script>
+<script type="text/javascript" src="{{asset('jQuery-File-Upload-9.21.0/js/jquery.iframe-transport.js')}}"></script>
+<script type="text/javascript" src="{{asset('jQuery-File-Upload-9.21.0/js/jquery.fileupload.js')}}"></script>
+<!-- js applicatif -->
+<script src="{{asset('js/front.js')}}"></script>
+
 </body>
 </html>
+
+
+</head>

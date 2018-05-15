@@ -1,4 +1,4 @@
-{% extends "::layout-default.html.twig" %}
+{% extends "PRVitrineBundle::layout.html.twig" %}
 
 {% block title %}Gallerie{% endblock %}
 {% block head %}
@@ -7,9 +7,30 @@
         .important { color: #336699; }
     </style>
 {% endblock %}
-{% block body %}
-    <h1>Gallerie</h1>
-    <p class="important">
-        Welcome on my awesome gallerie page.
-    </p>
+{% block pr_vitrine_body %}
+<script src="{{asset('AdminLTE/bower_components/jquery/dist/jquery.min.js')}}"></script>
+<h2> Gallerie - Voir les pieces téléchargées </h2><br/>
+<div class="row">
+<div id='message_info' class='alert alert-info'>
+   Visualisation des fichiers déposées
+</div>
+<div class="col-lg-12">
+        <div class="table-responsive">
+            {{tabResult|raw}}
+        </div>
+</div>
+<script>
+  $(document).ready(function() {
+      $('#table').DataTable({
+
+        language:{
+           'url': '//cdn.datatables.net/plug-ins/1.10.12/i18n/French.json'
+        },
+        dom: '<"top">rt <"bottomDT" <"leftDT"l><"middleDT"p><"rightDT"f> >'
+
+      });
+
+  });
+</script>
+</div>
 {% endblock %}
