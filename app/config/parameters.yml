@@ -10,3 +10,4 @@ parameters:
     mailer_user: contact@vitrine.fr
     mailer_password: null
     secret: b57a045470d125fc57d9350b18598043c1d63ac4
+    dir_uploads: '/uploads/'

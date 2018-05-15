@@ -13,4 +13,17 @@ services:
         # this means you cannot fetch services directly from the container via $container->get()
         # if you need to do this, you can override this setting on individual services
         public: false
-  
+    app.file_namer:
+        class: PR\VitrineBundle\Uploader\NamingInterface
+        argPRents: ["@security.token_storage"]
+        public: true
+
+    app.upload_listener:
+        class: PR\VitrineBundle\Uploader\UploadListener
+        tags:
+            - { name: kernel.event_listener, event: oneup_uploader.post_upload, method: onUpload }
+
+    app.upload_validator:
+        class: PR\VitrineBundle\Uploader\UploadValidator
+        tags:
+            - { name: kernel.event_listener, event: oneup_uploader.validation, method: onValidate }

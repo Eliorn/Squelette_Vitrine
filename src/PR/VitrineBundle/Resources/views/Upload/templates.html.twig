@@ -1,0 +1,71 @@
+{% from 'VitrineBundle:Upload:flash.macros.twig' import session_flash %}
+{% block js_blueimp_head %}
+    <!DOCTYPE HTML>
+    <!--
+    /*
+     * jQuery File Upload Plugin Demo 6.11
+     * https://github.com/blueimp/jQuery-File-Upload
+     *
+     * Copyright 2010, Sebastian Tschan
+     * https://blueimp.net
+     *
+     * Licensed under the MIT license:
+     * http://www.opensource.org/licenses/MIT
+     */
+    -->
+    <html lang="en">
+    <head>
+        <!-- Force latest IE rendering engine or ChromeFrame if installed -->
+        <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
+        <meta charset="utf-8">
+        <title>jQuery File Upload Demo</title>
+        <meta name="description" content="File Upload widget with multiple file selection, drag&amp;drop support, progress bar and preview images for jQuery. Supports cross-domain, chunked and resumable file uploads. Works with any server-side platform (Google App Engine, PHP, Python, Ruby on Rails, Java, etc.) that supports standard HTML form file uploads.">
+        <meta name="viewport" content="width=device-width">
+    {% block js_blueimp_stylesheets %}
+        {% include "VitrineBundle:Upload:stylesheets.html.twig" %}
+    {% endblock js_blueimp_stylesheets %}
+    </head>
+{% endblock js_blueimp_head %}
+{% block js_blueimp_body %}
+    <body>
+    <div class="container">
+        {% block flashes %}
+            {% if app.session.flashbag.peekAll|length > 0 %}
+                <div class="row-fluid span12">
+                    {{ session_flash() }}
+                </div>
+            {% endif %}
+        {% endblock flashes %}
+    <div class="row-fluid span7">
+        <!-- The file upload form used as target for the file upload widget -->
+        {% block js_blueimp_form %}
+            <!--  TODO: change path -->
+            <form id="fileupload" action="{{ path('default') }}" method="POST" {{ form_enctype(form) }}>
+                {{ form_widget(form) }}
+                {% include "VitrineBundle:Upload:form.html.twig" %}
+            </form>
+        {% endblock js_blueimp_form %}
+        <!-- modal-gallery is the modal dialog used for the image gallery -->
+        {% block js_blueimp_tmpl_gallery %}
+            {% include "VitrineBundle:Upload:gallery.html.twig" %}
+        {% endblock js_blueimp_tmpl_gallery %}
+        {% block js_blueimp_tmpl_upload %}
+            <!-- The template to display files available for upload -->
+            {% include "VitrineBundle:Upload:template-upload.html.twig" %}
+        {% endblock js_blueimp_tmpl_upload %}
+        <!-- The template to display files available for download -->
+        {% block js_blueimp_tmpl_download %}
+            {% include "VitrineBundle:Upload:template-download.html.twig" %}
+        {% endblock js_blueimp_tmpl_download %}
+    </div>
+    {% block js_blueimp_uploader %}
+        {% include "VitrineBundle:Upload:javascripts.html.twig" %}
+    {% endblock js_blueimp_uploader %}
+    {% block js_blueimp_uploader_init %}
+        <script type="text/javascript">
+            $(blueimpUploader('{{ path('files_put') }}'));
+        </script>
+    {% endblock js_blueimp_uploader_init %}
+    </body>
+    </html>
+{% endblock js_blueimp_body %}
