@@ -7,85 +7,85 @@ namespace PR\VitrineBundle\Controller;
 // N'oubliez pas ce use :
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 
 class VitrineController extends Controller
 {
   public function indexAction()
   {
+
+
     $content = $this->get('templating')->render('PRVitrineBundle:Vitrine:accueil.html.twig');
 
     return new Response($content);
   }
 
-  public function carouselAction()
+  public function actualitesAction()
   {
-    $content = $this->get('templating')->render('PRVitrineBundle:Vitrine:carrousel.html.twig');
+
+    $em = $this->getDoctrine()->getManager();
+    $articlesRepository = $em->getRepository('PRVitrineBundle:Article');
+
+    $queryListArticles = $articlesRepository->createQueryBuilder('a')->orderBy('a.date','DESC');
+    $query = $queryListArticles->getQuery();
+    $listArticles = $query->getResult();
+    return $this->render('PRVitrineBundle:Vitrine:actualites.html.twig', array(
+              'listArticles' => $listArticles,
+            )
+    );
+
+  }
+
+  public function galleriesAction()
+  {
+
+    $em = $this->getDoctrine()->getManager();
+    $articlesRepository = $em->getRepository('PRVitrineBundle:Gallery');
+
+    $queryListArticles = $articlesRepository->createQueryBuilder('a')->orderBy('a.title','DESC');
+    $query = $queryListArticles->getQuery();
+    $listGalleries = $query->getResult();
+
+    return $this->render('PRVitrineBundle:Vitrine:galleries.html.twig', array(
+              'listGalleries' => $listGalleries,
+            )
+    );
+
+  }
+
+  public function galleryDetailAction(Request $request)
+  {
+
+    $galleryName=$request->attributes->get('gallery');
+
+    $galleryDirectory=$this->get('kernel')->getRootDir().'/../web/data/galleries/'.$galleryName;
+    $galleryDirectoryWeb='./data/galleries/'.$galleryName.'/';
+    $listImg = array_diff(scandir($galleryDirectory),array('..','.'));
+    return $this->render('PRVitrineBundle:Vitrine:gallery_detail.html.twig',array(
+              'galleryName' => $galleryName,
+              'galleryDirectory' => $galleryDirectoryWeb,
+              'galleryList' => $listImg
+            ));
+
+  }
+
+  public function prestationsAction()
+  {
+
+    $content = $this->get('templating')->render('PRVitrineBundle:Vitrine:prestations.html.twig');
 
     return new Response($content);
   }
 
-  public function gallerieAction()
-  {
 
-    $dir=$_SERVER['DOCUMENT_ROOT']."/web_vitrine/web/uploads";
-      // echo '<pre>';
+  public function reportagesAction()
+    {
 
-      //on parcour le dossier pour les titres des fichiers
-      if($dossier = @opendir($dir)){
-        while(($fichier = readdir($dossier))!==false ){
-          if($fichier != '.' && $fichier != '..'){
+      $content = $this->get('templating')->render('PRVitrineBundle:Vitrine:reportages.html.twig');
 
-          }
-        }
-      }
-      // echo '</pre>';
-      //on parcour le dossier pour récupérer le contenu des fichiers
-
-      $htmlToShow='<table id="table" class="table table-striped table-bordered table-hover">
-        <caption> Fichiers déposés </caption>
-        <thead>
-          <tr>
-          <th colspan="1" rowspan="1"  tabindex="1">Fichier</th>
-          <th colspan="1" rowspan="1"  tabindex="2">Lien vers le fichier </th>
-          <th colspan="1" rowspan="1"  tabindex="3">Date de dépot </th>
-          </tr>
-        </thead>
-        <tbody>	';
-      if($dossier = @opendir($dir)){
-
-        while(false !== ($fichier = readdir($dossier))){
-
-
-          if($fichier != '.' && $fichier != '..'){
-            $dirComplet=$_SERVER['DOCUMENT_ROOT']."/web_vitrine/web/uploads/files/";
-
-
-            if($dossier2 = @opendir($dirComplet)){
-
-              while(($fichier2 = readdir($dossier2))!==false ){
-                if (!is_dir($dirComplet.$fichier2)){
-                  if($fichier2 != '.' && $fichier2 != '..'){
-
-                    $htmlToShow.="<tr>
-                        <td> $fichier</td>
-                        <td> <a target='_blank' href='.".($this->getParameter('dir_uploads')."files/$fichier2")."'>$fichier2</a> </td>
-                        <td> ".date ('d/m/Y H:m:s', filemtime($dirComplet.$fichier2))."</td>
-                      </tr>";
-
-                    clearstatcache();
-                  }
-                }
-              }
-            }
-          }
-
-        }
-      }
-      $htmlToShow.='</table>';
-      return $this->render('PRVitrineBundle:Vitrine:gallerie.html.twig', array(
-              'tabResult' => $htmlToShow
-      ));
+      return new Response($content);
   }
+
 
   public function contactsAction()
   {
@@ -94,10 +94,5 @@ class VitrineController extends Controller
     return new Response($content);
   }
 
-  public function uploadAction()
-  {
-    $content = $this->get('templating')->render('PRVitrineBundle:Upload:presentation.html.twig');
 
-    return new Response($content);
-  }
 }

@@ -2,18 +2,26 @@ accueil:
     path: /
     defaults: { _controller: PRVitrineBundle:Vitrine:index }
 
-gallerie:
-    path: /gallerie
-    defaults: { _controller: PRVitrineBundle:Vitrine:gallerie }
+actualites:
+    path: /actu
+    defaults: { _controller: PRVitrineBundle:Vitrine:actualites }
+
+prestations:
+    path: /prestations
+    defaults: { _controller: PRVitrineBundle:Vitrine:prestations }
+
+galleries:
+    path: /galleries
+    defaults: { _controller: PRVitrineBundle:Vitrine:galleries }
+
+gallery_show:
+    path: /gallery_show/{gallery}
+    defaults: { _controller: PRVitrineBundle:Vitrine:galleryDetail }
+
+reportages:
+    path: /reportages
+    defaults: { _controller: PRVitrineBundle:Vitrine:reportages }
 
 contacts:
     path: /contacts
     defaults: { _controller: PRVitrineBundle:Vitrine:contacts }
-
-upload:
-    path: /upload
-    defaults: { _controller: PRVitrineBundle:Vitrine:upload }
-
-carousel:
-    path: /carousel
-    defaults: { _controller: PRVitrineBundle:Vitrine:carousel }
