@@ -1,0 +1,77 @@
+{% extends "PRVitrineBundle::layout.html.twig" %}
+
+{% block title %}Galerie {{galleryName}}{% endblock %}
+{% block head %}
+
+    {{ parent() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block pr_vitrine_body %}
+<script type="text/javascript" src="{{asset('AdminLTE/bower_components/jquery/dist/jquery.min.js')}}"></script>
+
+
+    <h1>Galerie - {{galleryName}} </h1>
+    <p class="important">
+      <div class="row">
+
+        {% if galleryName == 'perso' %}
+          <iframe src='https://www.youtube.com/embed/dQw4w9WgXcQ' height="600" width="800px"></iframe>
+        {% else %}
+
+        <div class="col-sm-12 center-block center-text">
+
+          <!--THUMBNAILS-->
+          <ul class="list-inline">
+          {% for img in galleryList %}
+          <li data-toggle="modal" data-target="#myModal"><a class='thumbcrsl' href="#myCarousel" data-slide-to="{{loop.index0}}"><img class="img-thumbnail carsl" width="200px" height="300px" name='{{img}}' src="{{asset(galleryDirectory ~ img )}}"><br>
+          </a></li>
+          {% endfor %}
+          <!--end of thumbnails-->
+          </ul>
+          <!--begin modal window-->
+          <div class="modal fade" id="myModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <div class="pull-left">{{galleryName}}</div>
+                    <button type="button" class="close" data-dismiss="modal" title="Close"> <span class="glyphicon glyphicon-remove"></span></button>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="modal-body">
+                  <!--CAROUSEL CODE GOES HERE-->
+                  <div id="myCarousel" class="carousel slide " data-interval="false">
+
+                    <div class="carousel-inner">
+                      {% for img in galleryList %}
+                        {% if loop.index0 == 0 %}
+                         <div id='{{img}}' class="item active"> <img src="{{asset(galleryDirectory ~ img) }}" alt="">
+                        {% else %}
+                         <div id='{{img}}' class="item"> <img src="{{asset(galleryDirectory ~ img) }}" alt="">
+                        {% endif %}
+                      </div>
+
+                      {% endfor %}
+
+
+                      <!--end carousel-inner--></div>
+                      <!--Begin Previous and Next buttons-->
+                      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"> <span class="glyphicon glyphicon-chevron-right"></span></a>
+                      <!--end carousel--></div>
+                      <!--end modal-body--></div>
+                      <div class="modal-footer">
+                        <div class="pull-left"> <small> Test Carrousel <small></div>
+                        <button class="btn-sm close" type="button" data-dismiss="modal">Fermer</button>
+                        <div class="clearfix"></div>
+                      </div>
+                    </div>
+                  </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+
+
+    </p>
+{% endblock %}

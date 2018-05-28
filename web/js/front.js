@@ -58,7 +58,19 @@ $(function() {
   		});
   	});
 
-    
+
+
+
+
+      $('a.thumbcrsl').each(function(index){
+        $(this).click(function(){
+          
+            $('.carousel').carousel(index);
+
+
+          });
+        });
+
 
 
 

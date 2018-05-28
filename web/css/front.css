@@ -1,5 +1,12 @@
-body {
+*{
+	font-family:Oswald;
+}
 
+body {
+margin:auto;
+text-align:center;
+background-color:grey !important;
+color:white;
 }
 
 #header {
@@ -118,4 +125,36 @@ button.list-group-item:focus{
 
 #message_info{
 	width:fit-content !important;
+}
+
+
+#pr_banniere{
+
+	height:150px;
+	background-color:#444444;
+	text-align:center;
+	line-height:150px;
+	color:white;
+	text-transform:uppercase;
+
+}
+
+#pr_menu{
+	border-top:1px solid #888888;
+	border-bottom:1px solid #888888;
+	background-color:#444444;
+	color:white;
+	text-transform:uppercase;
+
+
+}
+
+.content-wrapper{
+	background-color:#444444 !important;
+}
+
+.main-footer{
+	background-color:#444444 !important;
+	color:white;
+	font-style:italic;
 }

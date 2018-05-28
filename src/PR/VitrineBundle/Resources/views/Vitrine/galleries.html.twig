@@ -1,0 +1,32 @@
+{% extends "PRVitrineBundle::layout.html.twig" %}
+
+{% block title %}Galeries{% endblock %}
+{% block head %}
+    {{ parent() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block pr_vitrine_body %}
+    <h1>Galeries </h1>
+    <p class="important">
+      <div class="row">
+
+        {% for gallery in listGalleries %}
+          <div class="col-lg-3"  style='float:left; text-align:left;'>
+            <span style='text-align:center;text-transform:uppercase;'>{{gallery.Title}}</span><br/>
+            <a href="{{ path('gallery_show', {'gallery': gallery.directory}) }}" data-slide-to="0"><img class="img-thumbnail" src="{{asset("data/galleries/"~ gallery.directory ~"/first.jpg")}}" alt="{{gallery.caption}}"><br>
+              <caption>{{gallery.description}}</caption>
+          </div>
+          {% if (loop.index0 == 3) or (loop.index0 == 6)  %}
+
+          <div class="separator" style='margin-bottom:25px; border-bottom:1px solid #888888;'> &nbsp;</div>
+          {% endif %}
+        {% endfor %}
+
+
+
+
+      </div>
+    </p>
+{% endblock %}

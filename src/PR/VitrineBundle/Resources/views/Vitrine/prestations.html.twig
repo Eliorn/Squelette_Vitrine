@@ -1,0 +1,20 @@
+{% extends "PRVitrineBundle::layout.html.twig" %}
+
+{% block title %}Gallerie{% endblock %}
+{% block head %}
+    {{ parent() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block pr_vitrine_body %}
+<script src="{{asset('AdminLTE/bower_components/jquery/dist/jquery.min.js')}}"></script>
+<h2> Prestations  </h2><br/>
+<div class="row">
+
+<div class="col-lg-12">
+        <img src='{{asset('img/Work-in-progress-hi.png')}}'/>
+</div>
+
+</div>
+{% endblock %}
