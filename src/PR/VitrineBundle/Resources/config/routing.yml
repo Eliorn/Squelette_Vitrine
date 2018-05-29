@@ -4,24 +4,28 @@ accueil:
 
 actualites:
     path: /actu
-    defaults: { _controller: PRVitrineBundle:Vitrine:actualites }
+    defaults: { _controller: PRVitrineBundle:Actualities:actualites }
 
 prestations:
     path: /prestations
-    defaults: { _controller: PRVitrineBundle:Vitrine:prestations }
+    defaults: { _controller: PRVitrineBundle:Business:prestations }
 
 galleries:
     path: /galleries
-    defaults: { _controller: PRVitrineBundle:Vitrine:galleries }
+    defaults: { _controller: PRVitrineBundle:Gallery:galleries }
 
 gallery_show:
     path: /gallery_show/{gallery}
-    defaults: { _controller: PRVitrineBundle:Vitrine:galleryDetail }
+    defaults: { _controller: PRVitrineBundle:Gallery:galleryDetail }
 
 reportages:
     path: /reportages
-    defaults: { _controller: PRVitrineBundle:Vitrine:reportages }
+    defaults: { _controller: PRVitrineBundle:Gallery:reportages }
 
 contacts:
     path: /contacts
-    defaults: { _controller: PRVitrineBundle:Vitrine:contacts }
+    defaults: { _controller: PRVitrineBundle:Contact:contacts }
+
+gestion_contact:
+    path: /contacts_mail
+    defaults: { _controller: PRVitrineBundle:Contact:contactsEnvoi }
