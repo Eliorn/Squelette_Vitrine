@@ -1,3 +1,8 @@
+pr_admin:
+    resource: "@PRAdminBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 pr_vitrine:
     resource: "@PRVitrineBundle/Resources/config/routing.yml"
     prefix:   /

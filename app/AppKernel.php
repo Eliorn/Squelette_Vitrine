@@ -18,8 +18,8 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new PR\VitrineBundle\PRVitrineBundle(),
-            new PR\UserBundle\PRUserBundle(),
             new Oneup\UploaderBundle\OneupUploaderBundle(),
+            new PR\AdminBundle\PRAdminBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
