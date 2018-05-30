@@ -1,0 +1,9 @@
+{% block menu_admin %}
+<ul class="nav navbar-nav" style='color:white !important;'>
+  </li>
+  {% for itemMenu in listMenu %}
+
+    <li><a href="{{ path(itemMenu.pathname) }}"><i class="{{itemMenu.icontype}}" aria-hidden="true"></i> {{itemMenu.Title}} </a></li>
+  {% endfor %}
+</ul>
+{% endblock %}

@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new PR\VitrineBundle\PRVitrineBundle(),
             new Oneup\UploaderBundle\OneupUploaderBundle(),
             new PR\AdminBundle\PRAdminBundle(),
+            new PR\UserBundle\PRUserBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
