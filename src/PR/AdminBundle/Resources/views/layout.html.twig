@@ -1,0 +1,38 @@
+{% extends "::layout-default.html.twig" %}
+
+{% block body %}
+    <link rel="stylesheet" href="{{asset('css/admin.css')}}">
+    {# On définit un sous-titre commun à toutes les pages du bundle, par exemple #}
+
+    {% for flashMessage in app.session.flashbag.get('info') %}
+        <div class="confirmation alert alert-info alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {{ flashMessage|raw }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        <div class="confirmation alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {{ flashMessage|raw }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('warn') %}
+        <div class="confirmation alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {{ flashMessage|raw }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        <div class="confirmation alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {{ flashMessage|raw  }}
+        </div>
+    {% endfor %}
+
+    {# On définit un nouveau bloc, que les vues du bundle pourront remplir #}
+    {% block pr_vitrine_body %}
+    {% endblock %}
+{% endblock %}
