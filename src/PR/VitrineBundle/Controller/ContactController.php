@@ -12,6 +12,7 @@ use Symfony\Component\Form\Forms;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
 class ContactController extends Controller
 {
@@ -27,7 +28,7 @@ class ContactController extends Controller
       ->add('email',      TextType::class)
       ->add('type',       ChoiceType::class, array('choices'=> array('Technique' => 'tech' , 'Administrateur du site' =>'admin' )  ))
       ->add('subject',    TextType::class)
-      ->add('content',    TextareaType::class);
+      ->add('content',    CKEditor::class);
 
     $form= $formBuilder->getForm();
 

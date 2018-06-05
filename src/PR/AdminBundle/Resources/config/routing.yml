@@ -12,8 +12,8 @@ admin_article:
 
 admin_gallery:
     path: /admin_galeries
-    defaults: { _controller: PRAdminBundle:Admin:contact }
+    defaults: { _controller: PRAdminBundle:Admin:gallery }
 
 admin_contact:
     path: /admin_contact
-    defaults: { _controller: PRAdminBundle:Admin:gallery }
+    defaults: { _controller: PRAdminBundle:Admin:contact }

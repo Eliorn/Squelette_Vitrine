@@ -17,7 +17,13 @@ class AdminController extends Controller
 
     public function accueilAction()
     {
-        return $this->render('PRAdminBundle:Admin:accueil.html.twig');
+      $em = $this->getDoctrine()->getManager();
+      $accueilRepository = $em->getRepository('PRVitrineBundle:Accueil');
+      $listAccueil = $accueilRepository->findAll();
+      return $this->render('PRAdminBundle:Admin:accueil.html.twig', array(
+                'listAccueil' => $listAccueil,
+              )
+      );
     }
 
     public function articleAction()
@@ -38,13 +44,27 @@ class AdminController extends Controller
 
     public function contactAction()
     {
+      $em = $this->getDoctrine()->getManager();
+      $contactRepository = $em->getRepository('PRVitrineBundle:Contact');
 
-        return $this->render('PRAdminBundle:Admin:contact.html.twig');
+      $listContacts = $contactRepository->findAll();
+      return $this->render('PRAdminBundle:Admin:contact.html.twig', array(
+                'listContacts' => $listContacts,
+              )
+      );
+
     }
 
     public function galleryAction()
     {
-        return $this->render('PRAdminBundle:Admin:gallery.html.twig');
+      $em = $this->getDoctrine()->getManager();
+      $galleryRepository = $em->getRepository('PRVitrineBundle:Gallery');
+
+      $listGalleries = $galleryRepository->findAll();
+      return $this->render('PRAdminBundle:Admin:gallery.html.twig', array(
+                'listGalleries' => $listGalleries,
+              )
+      );
     }
 
 

@@ -12,5 +12,29 @@
 {% endblock %}
 {% block pr_vitrine_body %}
     <h2> Gestion des galeries </h2>
+    <caption><span><input type='button' value="Nouvelle" class='btn btn-success'/><span></caption>
+    <table id='tableGalleries' name='tableGalleries' class='table table-striped table-bordered table-hover no-foooter dataTable' role="grid">
+      <thead>
+        <th>Titre</th>
+        <th>Description </th>
+        <th>Caption - Description au survol</th>
+        <th>Nom du fichier zip déposé (sans l'extension)</th>
+                  <th> Actions </th>
+      </thead>
+      <tbody>
 
+          {% for gallery in listGalleries %}
+          <tr>
+            <td>{{gallery.Title}}</td>
+            <td>{{gallery.Description}}</td>
+            <td>{{gallery.Caption}}</td>
+            <td>{{gallery.Directory}}</td>
+            <td>
+              <input type='button' value="Editer" class='btn btn-warning'/>
+              <input type='button' value="Supprimer" class='btn btn-danger'/>
+             </td>
+          </tr>
+          {% endfor %}
+      </tbody>
+    </table>
 {% endblock %}
