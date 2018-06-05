@@ -4,6 +4,11 @@ namespace PR\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Form\Forms;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
 class AdminController extends Controller
 {
@@ -17,11 +22,21 @@ class AdminController extends Controller
 
     public function accueilAction()
     {
+
       $em = $this->getDoctrine()->getManager();
       $accueilRepository = $em->getRepository('PRVitrineBundle:Accueil');
-      $listAccueil = $accueilRepository->findAll();
+      $accueil = $accueilRepository->findBy(array('id'=>1));
+
+      $formBuilder = $this->createFormBuilder($accueil[0])
+                          ->add('Contenu',  CKEditorType::Class);
+
+      $form= $formBuilder->getForm();
+
+
+
       return $this->render('PRAdminBundle:Admin:accueil.html.twig', array(
-                'listAccueil' => $listAccueil,
+                'form' => $form->createView(),
+
               )
       );
     }
