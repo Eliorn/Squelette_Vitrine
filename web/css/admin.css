@@ -1,0 +1,164 @@
+
+
+body {
+margin:auto;
+text-align:center;
+
+}
+
+#header {
+	background-color : #3D586E;
+	opacity: 0.9;
+}
+
+#header h1 {
+	color : #FF6770;
+}
+
+#header p {
+	color : #fff;
+}
+
+.jumbotron {
+	padding-top: 2px;
+	padding-bottom: 10px;
+}
+
+#content {
+	border-left : 1px solid #eee;
+}
+
+footer {
+	text-align : center;
+}
+
+.dataTable {
+	border-left : none;
+	border-right : none;
+}
+
+.dataTable th {
+	border: 1px solid #e0dede;
+}
+
+#dataTable td {
+	border : 1px solid #eee;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+	background: #e6e6e6 url("images/ui-bg_glass_75_e6e6e6_1x400.png") repeat-x scroll 50% 50% !important;
+}
+
+a.list-group-item:hover,
+button.list-group-item:hover,
+a.list-group-item:focus,
+button.list-group-item:focus{
+	color: #EA661E;
+	text-decoration: none;
+	background-color: #f5f5f5;
+}
+
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+	color: #EA661E;
+	background-color: #eee;
+	border-color: #eee;
+	z-index: 2;
+}
+
+.menuHaut-link.active, .menuHaut-link.active:hover, .menuHaut-link.active:focus {
+	background-color: #eee;
+	z-index: 2;
+}
+
+.ui-widget-header {
+	background : #C4D7ED;
+	opacity: 0.8;
+}
+
+.mergeDiv{
+	margin:0 !important;
+	padding:0 !important;
+
+}
+
+
+.alert-info2{
+	background-image: none;
+	background-color: #C9A0DC !important;
+	border-color: #C9A0DC !important;
+	color:#800080!important;
+}
+
+
+.Expandshow {
+    display: none;
+}
+.Expandhide:target + .Expandshow {
+    display: inline;
+}
+.Expandhide:target {
+    display: none;
+}
+
+
+/*style the (+) and (-) */
+.Expandhide, .Expandshow {
+	width: 30px;
+	height: 30px;
+	border-radius: 30px;
+	font-size: 20px;
+	color: #fff;
+	text-shadow: 0 1px 0 #666;
+	text-align: center;
+	text-decoration: none;
+	box-shadow: 1px 1px 2px #000;
+	background: #cccbbb;
+	opacity: .95;
+	margin-right: 0;
+	float: left;
+	margin-bottom: 25px;
+}
+
+
+#message_info{
+	width:fit-content !important;
+}
+
+
+#pr_banniere{
+
+	height:150px;
+
+	text-align:center;
+	line-height:150px;
+	color:white;
+	text-transform:uppercase;
+
+}
+
+#pr_menu{
+
+
+
+}
+
+.content-wrapper{
+
+}
+
+.main-footer{
+
+	color:white;
+	font-style:italic;
+}
+
+
+.login_forms form label{
+	font-family:arial !important;
+	font-weight:300;
+}
+
+.login_forms form input[type=submit]{
+	background-color:green;
+	border-color: green;
+}
