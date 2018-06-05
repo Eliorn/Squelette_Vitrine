@@ -36,6 +36,13 @@ class Article
     private $date;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="published", type="boolean" , options={"default":0})
+     */
+    private $published;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="Content", type="text")
@@ -177,5 +184,29 @@ class Article
     public function getEditor()
     {
         return $this->editor;
+    }
+
+    /**
+     * Set published
+     *
+     * @param boolean $published
+     *
+     * @return Article
+     */
+    public function setPublished($published)
+    {
+        $this->published = $published;
+
+        return $this;
+    }
+
+    /**
+     * Get published
+     *
+     * @return boolean
+     */
+    public function getPublished()
+    {
+        return $this->published;
     }
 }

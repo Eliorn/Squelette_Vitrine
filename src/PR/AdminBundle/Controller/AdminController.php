@@ -14,4 +14,38 @@ class AdminController extends Controller
     {
         return $this->render('PRAdminBundle:Admin:admin.html.twig');
     }
+
+    public function accueilAction()
+    {
+        return $this->render('PRAdminBundle:Admin:accueil.html.twig');
+    }
+
+    public function articleAction()
+    {
+      $em = $this->getDoctrine()->getManager();
+      $articlesRepository = $em->getRepository('PRVitrineBundle:Article');
+
+      $queryListArticles = $articlesRepository->createQueryBuilder('a')
+                                              ->orderBy('a.date','DESC');
+      $query = $queryListArticles->getQuery();
+      $listArticles = $query->getResult();
+      return $this->render('PRAdminBundle:Admin:article.html.twig', array(
+                'listArticles' => $listArticles,
+              )
+      );
+
+    }
+
+    public function contactAction()
+    {
+
+        return $this->render('PRAdminBundle:Admin:contact.html.twig');
+    }
+
+    public function galleryAction()
+    {
+        return $this->render('PRAdminBundle:Admin:gallery.html.twig');
+    }
+
+
 }
