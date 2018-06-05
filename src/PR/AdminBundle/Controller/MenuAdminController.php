@@ -16,7 +16,7 @@ class MenuAdminController extends Controller
     $em = $this->getDoctrine()->getManager();
     $menuRepository = $em->getRepository('PRAdminBundle:MenuAdmin');
 
-    $listMenu = $menuRepository->findAll();
+    $listMenu = $menuRepository->findBy(array(),array('order'=> 'ASC'));
 
     return $this->render('PRAdminBundle:Menu:menuAdmin.html.twig', array(
               'listMenu' => $listMenu,

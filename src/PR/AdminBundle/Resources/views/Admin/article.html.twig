@@ -1,0 +1,51 @@
+{% extends "PRAdminBundle::layout.html.twig" %}
+
+{% block title %}Administration{% endblock %}
+{% block head %}
+    {{ parent() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block menu %}
+    {{ render(controller('PRAdminBundle:MenuAdmin:list'))}}
+{% endblock %}
+{% block pr_vitrine_body %}
+    <h2> Gestion des articles </h2>
+    <table id='tableArticles' name='tableArticles' class='table table-striped table-bordered table-hover no-foooter dataTable' role="grid">
+      <thead>
+        <th>Titre</th>
+        <th>Posté par</th>
+        <th>Posté le</th>
+        <th>Publié (O/N)</th>
+        <th>Actions</th>
+      </thead>
+      <tbody>
+
+          {% for article in listArticles %}
+          <tr>
+            <td>{{article.Title}}</td>
+            <td>{{article.editor}}</td>
+            <td>{{article.date|date('d-m-Y H:i:s') }}</td>
+            <td>{% if article.published == 1 %}
+                <input type='checkbox' checked disabled />
+                {% else %}
+                <input type='checkbox'  disabled />
+                {% endif %}
+            </td>
+
+            <td>
+              {% if article.published == 1 %}
+                  <input type='button' value="Dépublier" class='btn btn-warning'/>
+                  {% else %}
+                  <input type='button' value="Publier" class='btn btn-success'/>
+              {% endif %}
+
+              <input type='button' value="Editer" class='btn btn-warning'/>
+              <input type='button' value="Supprimer" class='btn btn-danger'/> </td>
+          </tr>
+
+          {% endfor %}
+      </tbody>
+  </table>
+{% endblock %}
