@@ -29,7 +29,9 @@ $(function() {
                     "sSortAscending":  ": activer pour trier la colonne par ordre croissant",
                     "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
                 }
-            }
+
+            },
+            dom : '<"top">rt <"bottomDT" <"leftDT"1><"middleDT"p><"rightDT"f> >'
         } );
     } );
 
@@ -64,7 +66,7 @@ $(function() {
 
       $('a.thumbcrsl').each(function(index){
         $(this).click(function(){
-          
+
             $('.carousel').carousel(index);
 
 
