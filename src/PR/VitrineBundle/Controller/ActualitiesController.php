@@ -20,7 +20,9 @@ class ActualitiesController extends Controller
     $em = $this->getDoctrine()->getManager();
     $articlesRepository = $em->getRepository('PRVitrineBundle:Article');
 
-    $queryListArticles = $articlesRepository->createQueryBuilder('a')->orderBy('a.date','DESC');
+    $queryListArticles = $articlesRepository->createQueryBuilder('a')
+                                            ->where('a.published=1')
+                                            ->orderBy('a.date','DESC');
     $query = $queryListArticles->getQuery();
     $listArticles = $query->getResult();
     return $this->render('PRVitrineBundle:Actualities:actualites.html.twig', array(

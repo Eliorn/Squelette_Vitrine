@@ -1,3 +1,19 @@
 admin:
     path: /
     defaults: { _controller: PRAdminBundle:Admin:index }
+
+admin_accueil:
+    path: /admin_accueil
+    defaults: { _controller: PRAdminBundle:Admin:accueil }
+
+admin_article:
+    path: /admin_articles
+    defaults: { _controller: PRAdminBundle:Admin:article }
+
+admin_gallery:
+    path: /admin_galeries
+    defaults: { _controller: PRAdminBundle:Admin:contact }
+
+admin_contact:
+    path: /admin_contact
+    defaults: { _controller: PRAdminBundle:Admin:gallery }

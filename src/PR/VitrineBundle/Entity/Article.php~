@@ -36,6 +36,13 @@ class Article
     private $date;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="published", type="boolean" , options={"default":0})
+     */
+    private $published;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="Content", type="text")
@@ -153,5 +160,29 @@ class Article
     public function getFKMenu()
     {
         return $this->fKMenu;
+    }
+
+    /**
+     * Set editor
+     *
+     * @param string $editor
+     *
+     * @return Article
+     */
+    public function setEditor($editor)
+    {
+        $this->editor = $editor;
+
+        return $this;
+    }
+
+    /**
+     * Get editor
+     *
+     * @return string
+     */
+    public function getEditor()
+    {
+        return $this->editor;
     }
 }
