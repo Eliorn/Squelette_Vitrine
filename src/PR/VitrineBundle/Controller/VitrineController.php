@@ -15,11 +15,14 @@ class VitrineController extends Controller
 {
   public function indexAction()
   {
+    $em = $this->getDoctrine()->getManager();
+    $articlesRepository = $em->getRepository('PRVitrineBundle:Accueil');
 
-
-    $content = $this->get('templating')->render('PRVitrineBundle:Vitrine:accueil.html.twig');
-
-    return new Response($content);
+    $listAccueil = $articlesRepository->findAll();
+    return $this->render('PRVitrineBundle:Vitrine:accueil.html.twig', array(
+              'listAccueil' => $listAccueil,
+            )
+    );
   }
 
 
