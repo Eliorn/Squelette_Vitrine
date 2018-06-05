@@ -1,6 +1,7 @@
 {% extends "::layout-default.html.twig" %}
 
 {% block body %}
+  <link rel="stylesheet" href="{{asset('css/front.css')}}">
     {# On définit un sous-titre commun à toutes les pages du bundle, par exemple #}
 
     {% for flashMessage in app.session.flashbag.get('info') %}
