@@ -20,15 +20,13 @@ class ContactController extends Controller
   public function contactsAction()
   {
 
-    $contact = new Contact();
-
     $formBuilder = $this->get('form.factory')->createBuilder();
 
     $formBuilder
       ->add('email',      TextType::class)
       ->add('type',       ChoiceType::class, array('choices'=> array('Technique' => 'tech' , 'Administrateur du site' =>'admin' )  ))
       ->add('subject',    TextType::class)
-      ->add('content',    CKEditor::class);
+      ->add('content',    TextareaType::Class);
 
     $form= $formBuilder->getForm();
 

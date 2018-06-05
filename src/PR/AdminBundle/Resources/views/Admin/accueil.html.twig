@@ -20,19 +20,28 @@
       </thead>
       <tbody>
 
-          {% for accueil in listAccueil %}
+
           <tr>
+            <form action="" method="post"  >
+            <td>
+                {{form_start(form)}}
+                  {{ form_widget(form)}}
+
+                  {{ form_rest(form)}}
+                {{ form_end(form)}}
+
+            </td>
 
 
-                  <td>
-                    <textarea class='ckeditor'> {{accueil.Contenu|raw}} </textarea>
-                  </td>
-                  <td>
+
+                <td>
                     <input type='button' value="Valider" class='btn btn-success'/>
                     <input type='button' value="Annuler" class='btn btn-danger'/>
                 </td>
+
+            </form>
           </tr>
-          {% endfor %}
+
 
       </tbody>
     </table>
