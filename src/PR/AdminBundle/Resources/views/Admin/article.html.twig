@@ -37,13 +37,24 @@
 
             <td>
               {% if article.published == 1 %}
-                  <input type='button' value="Dépublier" class='btn btn-warning'/>
-                  {% else %}
-                  <input type='button' value="Publier" class='btn btn-success'/>
-              {% endif %}
+                <form action="{{path('admin_article_publish', {'id' : article.id})}}" method="post"  >
+                    <input type='submit' name='action' value="Dépublier" class='btn btn-warning'/>
+                </form>
 
-              <input type='button' value="Editer" class='btn btn-warning'/>
-              <input type='button' value="Supprimer" class='btn btn-danger'/>
+                  {% else %}
+                  <form action="{{path('admin_article_publish', {'id' : article.id})}}" method="post"  >
+                      <input type='submit' name='action' value="Publier" class='btn btn-success'/>
+                  </form>
+              {% endif %}
+              <form action="{{path('admin_article_edit', {'id' : article.id})}}" method="post"  >
+                  <input type='submit' value="Editer" class='btn btn-warning'/>
+              </form>
+              <form action="{{path('admin_article_delete', {'id' : article.id})}}" method="post"  >
+                  <input type='submit' value="Supprimer" class='btn btn-danger'/>
+              </form>
+
+
+
              </td>
           </tr>
 

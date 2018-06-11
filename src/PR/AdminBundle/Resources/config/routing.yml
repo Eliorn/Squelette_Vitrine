@@ -3,17 +3,37 @@ admin:
     defaults: { _controller: PRAdminBundle:Admin:index }
 
 admin_accueil:
-    path: /admin_accueil
-    defaults: { _controller: PRAdminBundle:Admin:accueil }
+    path: /accueil
+    defaults: { _controller: PRAdminBundle:Accueil:accueil }
+
+admin_accueil_edit:
+    path: /accueil/modifier
+    defaults: { _controller: PRAdminBundle:Accueil:accueilValidate }
 
 admin_article:
-    path: /admin_articles
-    defaults: { _controller: PRAdminBundle:Admin:article }
+    path: /articles
+    defaults: { _controller: PRAdminBundle:Articles:article }
+
+admin_article_new:
+    path: /articles/new
+    defaults: { _controller: PRAdminBundle:Articles:articleNew }
+
+admin_article_edit:
+    path: /articles/edit/{id}
+    defaults: { _controller: PRAdminBundle:Articles:articleEdit }
+
+admin_article_delete:
+    path: /articles/delete/{id}
+    defaults: { _controller: PRAdminBundle:Articles:articleDelete }
+
+admin_article_publish:
+    path: /articles/publish/{id}
+    defaults: { _controller: PRAdminBundle:Articles:articlePublish }
 
 admin_gallery:
-    path: /admin_galeries
-    defaults: { _controller: PRAdminBundle:Admin:gallery }
+    path: /galeries
+    defaults: { _controller: PRAdminBundle:Gallery:gallery }
 
 admin_contact:
-    path: /admin_contact
-    defaults: { _controller: PRAdminBundle:Admin:contact }
+    path: /contacts
+    defaults: { _controller: PRAdminBundle:Contacts:contact }
