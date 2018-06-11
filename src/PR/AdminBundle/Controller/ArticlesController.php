@@ -63,10 +63,19 @@ class ArticlesController extends Controller
 
     }
 
-    public function articleDeleteAction()
+    public function articleDeleteAction($id , Request $request)
     {
       $em = $this->getDoctrine()->getManager();
       $articlesRepository = $em->getRepository('PRVitrineBundle:Article');
+      $article= $articlesRepository->find($id);
+      if (!$article){
+        $request->getSession()->getFlashBag()->add('error', "L'article n'a pas pu être supprimé. Id $id non trouvé");
+      }else{
+        $em->remove($article);
+        $em->flush();
+        $request->getSession()->getFlashBag()->add('success', "L'article a été supprimé.");
+
+      }
 
       $queryListArticles = $articlesRepository->createQueryBuilder('a')
                                               ->orderBy('a.date','DESC');

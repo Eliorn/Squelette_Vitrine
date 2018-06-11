@@ -49,9 +49,29 @@
               <form action="{{path('admin_article_edit', {'id' : article.id})}}" method="post"  >
                   <input type='submit' value="Editer" class='btn btn-warning'/>
               </form>
-              <form action="{{path('admin_article_delete', {'id' : article.id})}}" method="post"  >
-                  <input type='submit' value="Supprimer" class='btn btn-danger'/>
+
+                  <input type='button' data-target='#confirm-delete' data-toggle='modal' value="Supprimer" class='btn btn-danger'/>
               </form>
+              <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="Suppression" aria-hidden="true">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              Suppression d'un article
+                          </div>
+                          <div class="modal-body">
+                              Êtes vous sûr(e) de vouloir supprimer cet article ?
+                              Attention , il n'y a pas de retour arrière possible si vous confirmez
+                          </div>
+                          <div class="modal-footer">
+
+                              <form action="{{path('admin_article_delete', {'id' : article.id})}}" method="post"  >
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                                <input type='submit' value="Supprimer" class='btn btn-danger'/>
+                              </form>
+                          </div>
+                      </div>
+                  </div>
+              </div>
 
 
 
