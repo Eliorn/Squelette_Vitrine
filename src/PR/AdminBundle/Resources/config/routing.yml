@@ -30,6 +30,22 @@ admin_article_publish:
     path: /articles/publish/{id}
     defaults: { _controller: PRAdminBundle:Articles:articlePublish }
 
+admin_prestations:
+    path: /prestations
+    defaults: { _controller: PRAdminBundle:Prestations:prestation }
+
+admin_prestations_new:
+    path: /prestations/new
+    defaults: { _controller: PRAdminBundle:Prestations:prestationNew }
+
+admin_prestations_edit:
+    path: /prestations/edit/{id}
+    defaults: { _controller: PRAdminBundle:Prestations:prestationEdit }
+
+admin_prestations_delete:
+    path: /prestations/delete/{id}
+    defaults: { _controller: PRAdminBundle:Prestations:prestationDelete }
+
 admin_gallery:
     path: /galeries
     defaults: { _controller: PRAdminBundle:Gallery:gallery }
@@ -37,3 +53,15 @@ admin_gallery:
 admin_contact:
     path: /contacts
     defaults: { _controller: PRAdminBundle:Contacts:contact }
+
+admin_contact_new:
+    path: /contacts/new
+    defaults: { _controller: PRAdminBundle:Contacts:contactNew }
+
+admin_contact_edit:
+    path: /contacts/edit/{id}
+    defaults: { _controller: PRAdminBundle:Contacts:contactEdit }
+
+admin_contact_delete:
+    path: /contacts/delete/{id}
+    defaults: { _controller: PRAdminBundle:Contacts:contactDelete }
