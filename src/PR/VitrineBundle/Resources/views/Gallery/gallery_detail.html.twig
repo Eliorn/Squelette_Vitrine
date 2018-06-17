@@ -20,13 +20,24 @@
           <iframe src='https://www.youtube.com/embed/dQw4w9WgXcQ' height="600" width="800px"></iframe>
         {% else %}
 
-        <div class="col-sm-12 center-block center-text">
+
 
           <!--THUMBNAILS-->
           <ul class="list-inline">
-          {% for img in galleryList %}
-          <li data-toggle="modal" data-target="#myModal"><a class='thumbcrsl' href="#myCarousel" data-slide-to="{{loop.index0}}"><img class="img-thumbnail carsl" width="200px" height="300px" name='{{img}}' src="{{asset(galleryDirectory ~ img )}}"><br>
-          </a></li>
+          {% for imgs in galleryList|batch(4) %}
+          <div class="col-sm-12 center-block center-text" style='margin-bottom:10px;'>
+            {% for img in imgs %}
+
+              <div class="col-sm-3" style='float:left;'>
+                  <li data-toggle="modal" data-target="#myModal">
+                    <a class='thumbcrsl' href="#myCarousel" data-slide-to="{{(loop.parent.loop.index0 * 4) + loop.index0}}">
+                      <img class="img-thumbnail carsl" width="200px" height="300px" name='{{img}}' src="{{asset(galleryDirectory ~ img )}}">
+                    </a>
+                  </li>
+              </div>
+
+            {% endfor %}
+            </div>
           {% endfor %}
           <!--end of thumbnails-->
           </ul>
