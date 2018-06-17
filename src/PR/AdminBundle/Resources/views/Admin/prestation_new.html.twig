@@ -1,0 +1,33 @@
+{% extends "PRAdminBundle::layout.html.twig" %}
+
+{% block title %}Administration{% endblock %}
+{% block head %}
+    {{ parent() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block menu %}
+    {{ render(controller('PRAdminBundle:MenuAdmin:list'))}}
+{% endblock %}
+{% block pr_vitrine_body %}
+
+    <h2> Création de prestation </h2>
+    <form action="{{path('admin_prestations_new')}}" method="post"  >
+
+        {{form_start(form)}}
+          {{ form_widget(form)}}
+
+          {{ form_rest(form)}}
+          <input name='action' type='submit' value="Valider" class='btn btn-success'/>
+          <input name='action' type='submit' value="Annuler" class='btn btn-danger'/>
+          <a href='{{path('admin_prestations')}}' class='btn btn-info'> Revenir a l'accueil </a>
+        {{ form_end(form)}}
+
+
+
+
+
+
+
+{% endblock %}
