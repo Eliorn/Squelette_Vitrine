@@ -29,3 +29,7 @@ contacts:
 gestion_contact:
     path: /contacts_mail
     defaults: { _controller: PRVitrineBundle:Contact:contactsEnvoi }
+
+mentions_legales:
+    path: /mentions_legales
+    defaults: { _controller: PRVitrineBundle:Contact:mentionsLegales}
