@@ -9,6 +9,26 @@ background-color:grey !important;
 color:white;
 }
 
+
+a{
+color:white;
+}
+
+a:hover{
+color:white;
+text-decoration: underline;
+}
+
+a:active{
+color:white;
+text-decoration: underline;
+}
+
+a:visited{
+color:white;
+
+}
+
 #header {
 	background-color : #3D586E;
 	opacity: 0.9;
