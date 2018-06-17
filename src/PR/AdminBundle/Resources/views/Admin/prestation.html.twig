@@ -1,0 +1,72 @@
+{% extends "PRAdminBundle::layout.html.twig" %}
+
+{% block title %}Administration{% endblock %}
+{% block head %}
+    {{ parent() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block menu %}
+    {{ render(controller('PRAdminBundle:MenuAdmin:list'))}}
+{% endblock %}
+{% block pr_vitrine_body %}
+    <h2> Gestion des prestations </h2>
+    <caption><span>
+      <form action="{{path('admin_prestations_new')}}" method="post"  >
+          <input type='submit' value="Nouveau" class='btn btn-success'/>
+      </form>
+      <span></caption>
+    <table id='tableArticles' name='tableArticles' class='table table-striped table-bordered table-hover no-foooter dataTable' role="grid">
+      <thead>
+        <th>Titre</th>
+        <th>Type</th>
+        <th>Prix</th>
+        <th> Actions </th>
+      </thead>
+      <tbody>
+
+          {% for prestation in listPrestations %}
+          <tr>
+            <td>{{prestation.Title}}</td>
+            <td>{{prestation.Type}}</td>
+            <td>{{prestation.Price }}</td>
+            <td>
+                <form action="{{path('admin_prestations_edit', {'id' : prestation.id})}}" method="post"  >
+                  <input type='submit' value="Editer" class='btn btn-warning'/>
+              </form>
+
+                  <input type='button' data-target='#confirm-delete-{{prestation.id}}' data-toggle='modal' value="Supprimer" class='btn btn-danger'/>
+              </form>
+              <div class="modal fade" id="confirm-delete-{{prestation.id}}" tabindex="-1" role="dialog" aria-labelledby="Suppression" aria-hidden="true">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              Suppression d'un prestation
+                          </div>
+                          <div class="modal-body">
+                              Êtes vous sûr(e) de vouloir supprimer cet prestation ?
+                              Attention , il n'y a pas de retour arrière possible si vous confirmez
+                          </div>
+                          <div class="modal-footer">
+
+                              <form action="{{path('admin_prestations_delete', {'id' : prestation.id})}}" method="post"  >
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                                <input type='submit' value="Supprimer" class='btn btn-danger'/>
+                              </form>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+
+
+             </td>
+          </tr>
+
+          {% endfor %}
+      </tbody>
+    </table>
+
+
+{% endblock %}
