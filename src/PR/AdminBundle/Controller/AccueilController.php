@@ -19,9 +19,9 @@ class AccueilController extends Controller
 
       $em = $this->getDoctrine()->getManager();
       $accueilRepository = $em->getRepository('PRVitrineBundle:Accueil');
-      $accueil = $accueilRepository->findBy(array('id'=>1));
+      $accueil = $accueilRepository->find(1);
 
-      $formBuilder = $this->createFormBuilder($accueil[0])
+      $formBuilder = $this->createFormBuilder($accueil)
                           ->add('Contenu',  CKEditorType::Class);
 
       $form= $formBuilder->getForm();
@@ -38,8 +38,7 @@ class AccueilController extends Controller
     public function accueilValidateAction(Request $request){
       $em = $this->getDoctrine()->getManager();
       $accueilRepository = $em->getRepository('PRVitrineBundle:Accueil');
-      $accueil = $accueilRepository->findBy(array('id'=>1));
-      $acceuil = $accueil[0];
+      $accueil = $accueilRepository->findBy(1);
       $contenu = $request->request->get('form')['Contenu'];
 
       if ($request->request->get('action')== 'Valider'){
