@@ -36,6 +36,9 @@ class ContactController extends Controller
     );
   }
 
+  public function mentionsLegalesAction(){
+    return $this->render('PRVitrineBundle:Contact:mentions.html.twig');
+  }
   public function contactsEnvoiAction(Request $request )
   {
 
