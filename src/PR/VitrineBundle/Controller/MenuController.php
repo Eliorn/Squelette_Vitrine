@@ -15,9 +15,12 @@ class MenuController extends Controller
   {
     $em = $this->getDoctrine()->getManager();
     $menuRepository = $em->getRepository('PRVitrineBundle:Menu');
+    $queryListMenu = $menuRepository->createQueryBuilder('m')
+                                    ->where('m.showMenu=1')
+                                    ->orderBy('m.order','ASC');
+    $query = $queryListMenu->getQuery();
+    $listMenu = $query->getResult();
 
-    $listMenu = $menuRepository->findAll();
-  
     return $this->render('PRVitrineBundle:Menu:menu.html.twig', array(
               'listMenu' => $listMenu,
             )

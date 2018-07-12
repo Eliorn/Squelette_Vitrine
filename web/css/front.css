@@ -150,19 +150,26 @@ button.list-group-item:focus{
 
 #pr_banniere{
 
-	height:150px;
-	background-color:#444444;
+	height:auto;
+	max-height: 259px;
+	width:auto;
+	background-color:#111111;
+	background-image: url('../img/banniere.jpg');
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-position: center;
 	text-align:center;
-	line-height:150px;
+	line-height:259px;
 	color:white;
 	text-transform:uppercase;
+
 
 }
 
 #pr_menu{
 	border-top:1px solid #888888;
 	border-bottom:1px solid #888888;
-	background-color:#444444;
+	background-color:#222222;
 	color:white;
 	text-transform:uppercase;
 
@@ -170,11 +177,11 @@ button.list-group-item:focus{
 }
 
 .content-wrapper{
-	background-color:#444444 !important;
+	background-color:#111111 !important;
 }
 
 .main-footer{
-	background-color:#444444 !important;
+	background-color:#111111 !important;
 	color:white;
 	font-style:italic;
 }
@@ -188,4 +195,28 @@ button.list-group-item:focus{
 .login_forms form input[type=submit]{
 	background-color:green;
 	border-color: green;
+}
+
+.modal-content{
+	height:98%;
+	width:92%;
+	background-color: #111111 !important;
+}
+
+.modal-header{
+	background-color: #111111 !important;
+}
+
+.modal-body{
+	background-color: #111111 !important;
+}
+
+.modal-footer{
+	background-color: #111111 !important;
+}
+
+.modal-content .close{
+	opacity: 1;
+	text-shadow: none;
+	color:white;
 }
