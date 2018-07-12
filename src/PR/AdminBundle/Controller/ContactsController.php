@@ -45,7 +45,7 @@ class ContactsController extends Controller
             $em->persist($contact);
             $em->flush();
             $request->getSession()->getFlashBag()->add('success', "La création du contact a été effectuée");
-          }else if ($request->request->get('action')== 'Annuler'){
+          }else if ($request->request->get('action')== 'Réinitialiser'){
             $request->getSession()->getFlashBag()->add('warn', "Retour au début !");
           }
 
@@ -76,7 +76,7 @@ class ContactsController extends Controller
             $em->persist($contact);
             $em->flush();
             $request->getSession()->getFlashBag()->add('success', "La mise a jour de l'contact a été effectuée");
-          }else if ($request->request->get('action')== 'Annuler'){
+          }else if ($request->request->get('action')== 'Réinitialiser'){
             $request->getSession()->getFlashBag()->add('warn', "Retour au début !");
           }
 
