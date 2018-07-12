@@ -37,9 +37,18 @@ class GalleryController extends Controller
 
     $galleryName=$request->attributes->get('gallery');
 
+    $em = $this->getDoctrine()->getManager();
+    $imageRepository = $em->getRepository('PRVitrineBundle:Image');
+    $galleriesRepository = $em->getRepository('PRVitrineBundle:Gallery');
     $galleryDirectory=$this->get('kernel')->getRootDir().'/../web/data/galleries/'.$galleryName;
     $galleryDirectoryWeb='./data/galleries/'.$galleryName.'/';
-    $listImg = array_diff(scandir($galleryDirectory),array('..','.'));
+    $queryListImg = $imageRepository->createQueryBuilder('a')
+                                    ->where('a.galleryPath=?1 ')
+                                    ->orderBy('a.pictureOrder','ASC');
+    $queryListImg->setParameters(array(1 => $galleryDirectoryWeb));
+    $query = $queryListImg->getQuery();
+    $listImg = $query->getResult();
+
     return $this->render('PRVitrineBundle:Gallery:gallery_detail.html.twig',array(
               'galleryName' => $galleryName,
               'galleryDirectory' => $galleryDirectoryWeb,
