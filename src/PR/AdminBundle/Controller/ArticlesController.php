@@ -45,7 +45,7 @@ class ArticlesController extends Controller
         if (isset($request->request->get('form')['Published'])){
             $published = true;
         }else{
-            $published = false;          
+            $published = false;
         }
         $user = $this->get('security.token_storage')->getToken()->getUser()->getUsername();
         $date= new \DateTime();
@@ -59,7 +59,7 @@ class ArticlesController extends Controller
         $em->persist($article);
         $em->flush();
         $request->getSession()->getFlashBag()->add('success', "La création de l'article a été effectuée");
-      }else if ($request->request->get('action')== 'Annuler'){
+      }else if ($request->request->get('action')== 'Réinitialiser'){
         $request->getSession()->getFlashBag()->add('warn', "Retour au début !");
       }
 
@@ -96,7 +96,7 @@ class ArticlesController extends Controller
         $em->persist($article);
         $em->flush();
         $request->getSession()->getFlashBag()->add('success', "La mise a jour de l'article a été effectuée");
-      }else if ($request->request->get('action')== 'Annuler'){
+      }else if ($request->request->get('action')== 'Réinitialiser'){
         $request->getSession()->getFlashBag()->add('warn', "Retour au début !");
       }
 

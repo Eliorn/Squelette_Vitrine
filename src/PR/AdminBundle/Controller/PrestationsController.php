@@ -53,7 +53,7 @@ class PrestationsController extends Controller
         $em->persist($prestation);
         $em->flush();
         $request->getSession()->getFlashBag()->add('success', "La création de la prestation a été effectuée");
-      }else if ($request->request->get('action')== 'Annuler'){
+      }else if ($request->request->get('action')== 'Réinitialiser'){
         $request->getSession()->getFlashBag()->add('warn', "Retour au début !");
       }
 
@@ -95,7 +95,7 @@ class PrestationsController extends Controller
         $em->persist($prestation);
         $em->flush();
         $request->getSession()->getFlashBag()->add('success', "La mise a jour de la prestation a été effectuée");
-      }else if ($request->request->get('action')== 'Annuler'){
+      }else if ($request->request->get('action')== 'Réinitialiser'){
         $request->getSession()->getFlashBag()->add('warn', "Retour au début !");
       }
 
