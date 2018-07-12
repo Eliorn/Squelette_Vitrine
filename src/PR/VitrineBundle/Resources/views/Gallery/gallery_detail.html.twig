@@ -24,14 +24,15 @@
 
           <!--THUMBNAILS-->
           <ul class="list-inline">
-          {% for imgs in galleryList|batch(4) %}
-          <div class="col-sm-12 center-block center-text" style='margin-bottom:10px;'>
+
+          {% for imgs in galleryList|batch(6) %}
+          <div class="col-sm-12 center-block center-text" style='margin-bottom:100px;'>
             {% for img in imgs %}
 
-              <div class="col-sm-3" style='float:left;'>
+              <div class="col-sm-2" style='float:left;'>
                   <li data-toggle="modal" data-target="#myModal">
-                    <a class='thumbcrsl' href="#myCarousel" data-slide-to="{{(loop.parent.loop.index0 * 4) + loop.index0}}">
-                      <img class="img-thumbnail carsl" width="200px" height="300px" name='{{img}}' src="{{asset(galleryDirectory ~ img )}}">
+                    <a class='thumbcrsl' href="#myCarousel" data-slide-to="{{(loop.parent.loop.index0 * 6) + loop.index0}}">
+                      <img class="img-thumbnail carsl" width="200px" height="200px" name='{{img}}' src="{{asset(galleryDirectory ~ img )}}">
                     </a>
                   </li>
               </div>
@@ -47,7 +48,7 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <div class="pull-left">{{galleryName}}</div>
-                    <button type="button" class="close" data-dismiss="modal" title="Close"> <span class="glyphicon glyphicon-remove"></span></button>
+                    <button type="button" style='color:white;' class="close" data-dismiss="modal" title="Close"> <span class="glyphicon glyphicon-remove"></span></button>
                   </div>
                   <div class="clearfix"></div>
                   <div class="modal-body">
@@ -72,8 +73,8 @@
                       <!--end carousel--></div>
                       <!--end modal-body--></div>
                       <div class="modal-footer">
-                        <div class="pull-left"> <small> Test Carrousel <small></div>
-                        <button class="btn-sm close" type="button" data-dismiss="modal">Fermer</button>
+                        <div class="pull-left"> </div>
+                        <button class="btn-sm btn-default close" type="button" data-dismiss="modal">Fermer</button>
                         <div class="clearfix"></div>
                       </div>
                     </div>
