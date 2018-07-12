@@ -32,7 +32,7 @@
               <div class="col-sm-2" style='float:left;'>
                   <li data-toggle="modal" data-target="#myModal">
                     <a class='thumbcrsl' href="#myCarousel" data-slide-to="{{(loop.parent.loop.index0 * 6) + loop.index0}}">
-                      <img class="img-thumbnail carsl" width="200px" height="200px" name='{{img}}' src="{{asset(galleryDirectory ~ img )}}">
+                      <img class="img-thumbnail carsl" width="200px" height="200px" name='{{img.name}}' src="{{asset(img.galleryPath ~ img.name )}}">
                     </a>
                   </li>
               </div>
@@ -58,9 +58,9 @@
                     <div class="carousel-inner">
                       {% for img in galleryList %}
                         {% if loop.index0 == 0 %}
-                         <div id='{{img}}' class="item active"> <img src="{{asset(galleryDirectory ~ img) }}" alt="">
+                         <div id='{{img.name}}' class="item active"> <img src="{{asset(img.galleryPath ~ img.name) }}" alt="">
                         {% else %}
-                         <div id='{{img}}' class="item"> <img src="{{asset(galleryDirectory ~ img) }}" alt="">
+                         <div id='{{img.name}}' class="item"> <img src="{{asset(img.galleryPath ~ img.name) }}" alt="">
                         {% endif %}
                       </div>
 
