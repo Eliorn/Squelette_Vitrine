@@ -1,0 +1,29 @@
+# Learn more about services, parameters and containers at
+# https://symfony.com/doc/current/service_container.html
+parameters:
+    #parameter_name: value
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        # automatically injects dependencies in your services
+        autowire: true
+        # automatically registers your services as commands, event subscribers, etc.
+        autoconfigure: true
+        # this means you cannot fetch services directly from the container via $container->get()
+        # if you need to do this, you can override this setting on individual services
+        public: false
+    app.file_namer:
+        class: PR\VitrineBundle\Uploader\NamingInterface
+        arguments: ["@security.token_storage"]
+        public: true
+
+    app.upload_listener:
+        class: PR\VitrineBundle\Uploader\UploadListener
+        tags:
+            - { name: kernel.event_listener, event: oneup_uploader.post_upload, method: onUpload }
+
+    app.upload_validator:
+        class: PR\VitrineBundle\Uploader\UploadValidator
+        tags:
+            - { name: kernel.event_listener, event: oneup_uploader.validation, method: onValidate }
