@@ -19,7 +19,6 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new FOS\CKEditorBundle\FOSCKEditorBundle(),
             new PR\VitrineBundle\PRVitrineBundle(),
-            new Oneup\UploaderBundle\OneupUploaderBundle(),
             new PR\AdminBundle\PRAdminBundle(),
             new PR\UserBundle\PRUserBundle(),
         ];
