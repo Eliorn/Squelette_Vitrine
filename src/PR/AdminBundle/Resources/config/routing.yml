@@ -50,6 +50,10 @@ admin_gallery:
     path: /galeries
     defaults: { _controller: PRAdminBundle:Gallery:gallery }
 
+admin_gallery_new:
+    path: /galeries/new
+    defaults: { _controller: PRAdminBundle:Gallery:galleryNew }
+
 admin_contact:
     path: /contacts
     defaults: { _controller: PRAdminBundle:Contacts:contact }

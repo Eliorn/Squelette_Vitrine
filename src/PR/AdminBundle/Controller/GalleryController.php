@@ -30,7 +30,7 @@ class GalleryController extends Controller
     }
 
 
-    public function gallerySynchronise(){
+    private function gallerySynchronise(){
       $em = $this->getDoctrine()->getManager();
       $galleryRepository = $em->getRepository('PRVitrineBundle:Gallery');
       $imageRepository = $em->getRepository('PRVitrineBundle:Image');
@@ -57,6 +57,45 @@ class GalleryController extends Controller
 
     }
 
+
+    public function galleryNewAction(Request $request){
+      $em = $this->getDoctrine()->getManager();
+      $galleryRepository = $em->getRepository('PRVitrineBundle:Gallery');
+      $gallery= new Gallery();
+
+      if ($request->request->get('action')== 'Valider'){
+
+        if (is_dir($this->get('kernel')->getRootDir().'/../web/data/galleries/'.strtolower($request->request->get('form')['Title']))){
+
+              $request->getSession()->getFlashBag()->add('error', "Une galerie avec le même nom existe déjà ! ");
+        }else{
+          mkdir($this->get('kernel')->getRootDir().'/../web/data/galleries/'.strtolower($request->request->get('form')['Title']));
+
+          $gallery->setTitle($request->request->get('form')['Title']);
+          $gallery->setDescription($request->request->get('form')['Description']);
+          $gallery->setCaption($request->request->get('form')['Caption']);
+          $gallery->setDirectory($request->request->get('form')['Title']);
+          $em->persist($gallery);
+          $em->flush();
+          $request->getSession()->getFlashBag()->add('success', "La création de la galerie a été effectuée");
+
+        }
+      }else if ($request->request->get('action')== 'Réinitialiser'){
+        $request->getSession()->getFlashBag()->add('warn', "Retour au début !");
+      }
+
+      $formBuilder = $this->createFormBuilder($gallery)
+                          ->add('Title',    TextType::Class , array('empty_data' => 'Votre titre ici'))
+                          ->add('Description',  TextType::Class , array('empty_data' => 'La description de la galerie'))
+                          ->add('Caption', TextType::Class);
+
+      $form= $formBuilder->getForm();
+
+      return $this->render('PRAdminBundle:Admin:gallery_new.html.twig', array(
+                'form' => $form->createView(),
+            )
+      );
+    }
 
 
 }
