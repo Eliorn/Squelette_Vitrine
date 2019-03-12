@@ -54,6 +54,18 @@ admin_gallery_new:
     path: /galeries/new
     defaults: { _controller: PRAdminBundle:Gallery:galleryNew }
 
+admin_gallery_edit:
+    path: /galeries/edit/{gallery}
+    defaults: { _controller: PRAdminBundle:Gallery:galleryEdit }
+
+admin_gallery_delete:
+    path: /galeries/delete/{id}
+    defaults: { _controller: PRAdminBundle:Gallery:galleryDelete }
+
+admin_image_del:
+    path: /galeries/delImg/{image}/{galleryName}
+    defaults: { _controller: PRAdminBundle:Gallery:deleteImageFromGallery }
+
 admin_contact:
     path: /contacts
     defaults: { _controller: PRAdminBundle:Contacts:contact }
