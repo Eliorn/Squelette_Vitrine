@@ -74,7 +74,7 @@ class GalleryController extends Controller
           $gallery->setTitle($request->request->get('form')['Title']);
           $gallery->setDescription($request->request->get('form')['Description']);
           $gallery->setCaption($request->request->get('form')['Caption']);
-          $gallery->setDirectory($request->request->get('form')['Title']);
+          $gallery->setDirectory(strtolower($request->request->get('form')['Title']));
           $em->persist($gallery);
           $em->flush();
           $request->getSession()->getFlashBag()->add('success', "La création de la galerie a été effectuée");
@@ -95,6 +95,80 @@ class GalleryController extends Controller
                 'form' => $form->createView(),
             )
       );
+    }
+
+    public function galleryDeleteAction(Request $request){
+
+
+
+      return $this->render('PRAdminBundle:Admin:gallery_populate.html.twig', array(
+
+            )
+      );
+    }
+
+
+    public function galleryEditAction(Request $request){
+
+      $galleryName=$request->attributes->get('gallery');
+      $em = $this->getDoctrine()->getManager();
+      $imageRepository = $em->getRepository('PRVitrineBundle:Image');
+      $galleriesRepository = $em->getRepository('PRVitrineBundle:Gallery');
+      $galleryDirectory=$this->get('kernel')->getRootDir().'/../web/data/galleries/'.$galleryName;
+      $galleryDirectoryWeb='./data/galleries/'.$galleryName.'/';
+
+      $queryListImg = $imageRepository->createQueryBuilder('a')
+                                      ->where('a.galleryPath=?1 ')
+                                      ->orderBy('a.pictureOrder','ASC');
+      $queryListImg->setParameters(array(1 => $galleryDirectoryWeb));
+      $query = $queryListImg->getQuery();
+      $listImg = $query->getResult();
+
+      return $this->render('PRAdminBundle:Admin:gallery_populate.html.twig',array(
+                'galleryName' => $galleryName,
+                'galleryDirectory' => $galleryDirectoryWeb,
+                'listPictures' => $listImg
+              ));
+
+    }
+
+
+    public function deleteImageFromGalleryAction(Request $request){
+
+      $galleryName=$request->attributes->get('galleryName');
+      $imageName=$request->attributes->get('image');
+      $em = $this->getDoctrine()->getManager();
+      $imageRepository = $em->getRepository('PRVitrineBundle:Image');
+
+      $galleriesRepository = $em->getRepository('PRVitrineBundle:Gallery');
+      $galleryDirectory=$this->get('kernel')->getRootDir().'/../web/data/galleries/'.$galleryName;
+      $galleryDirectoryWeb='./data/galleries/'.$galleryName.'/';
+
+      $imageToDel = $imageRepository->findOneBy(array('name' => $imageName, 'galleryPath' => $galleryDirectoryWeb));
+      $em->remove($imageToDel);
+      $em->flush();
+      @unlink($galleryDirectory.'/'.$imageName);
+
+
+      $queryListImg = $imageRepository->createQueryBuilder('a')
+                                      ->where('a.galleryPath=?1 ')
+                                      ->orderBy('a.pictureOrder','ASC');
+      $queryListImg->setParameters(array(1 => $galleryDirectoryWeb));
+      $query = $queryListImg->getQuery();
+      $listImg = $query->getResult();
+
+      return $this->render('PRAdminBundle:Admin:gallery_populate.html.twig',array(
+                'galleryName' => $galleryName,
+                'galleryDirectory' => $galleryDirectoryWeb,
+                'listPictures' => $listImg
+              ));
+
+
+    }
+
+    public function addImageToGallery(Request $request){
+
+
     }
 
 

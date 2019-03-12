@@ -38,7 +38,9 @@
             <td>{{gallery.Caption}}</td>
             <td>{{gallery.Directory}}</td>
             <td>
-              <input type='button' value="Editer" class='btn btn-warning'/>
+              <form action="{{path('admin_gallery_edit', {'gallery' : gallery.Directory})}}" method="post"  >
+                  <input type='submit' value="Modifier" class='btn btn-warning'/>
+              </form>
               <input type='button' value="Supprimer" class='btn btn-danger'/>
              </td>
           </tr>
