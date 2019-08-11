@@ -21,7 +21,9 @@ class GalleryController extends Controller
     $em = $this->getDoctrine()->getManager();
     $galleriesRepository = $em->getRepository('PRVitrineBundle:Gallery');
 
-    $queryListGalleries = $galleriesRepository->createQueryBuilder('a')->orderBy('a.title','DESC');
+    $queryListGalleries = $galleriesRepository->createQueryBuilder('a')
+                          ->where('a.id > -1')
+                          ->orderBy('a.title','DESC');
     $query = $queryListGalleries->getQuery();
     $listGalleries = $query->getResult();
 
