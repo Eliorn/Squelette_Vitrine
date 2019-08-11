@@ -23,25 +23,25 @@
 
 
           <!--THUMBNAILS-->
-          <ul class="list-inline">
 
-          {% for imgs in galleryList|batch(6) %}
-          <div class="col-sm-12 center-block center-text" style='margin-bottom:100px;'>
-            {% for img in imgs %}
+          <div class='grid-container'>
+          {% for img in galleryList %}
+            <div class='img_crop'>
 
-              <div class="col-sm-2" style='float:left;'>
-                  <li data-toggle="modal" data-target="#myModal">
-                    <a class='thumbcrsl' href="#myCarousel" data-slide-to="{{(loop.parent.loop.index0 * 6) + loop.index0}}">
-                      <img class="img-thumbnail carsl" width="200px" height="200px" name='{{img.name}}' src="{{asset(img.galleryPath ~ img.name )}}">
+
+                    <a data-toggle="modal" data-target="#myModal" class='thumbcrsl' href="#myCarousel" data-slide-to="{{loop.index0}}">
+                      <img class="img-thumbnail carsl" width="100%"  name='{{img.name}}' src="{{asset(img.galleryPath ~ img.name )}}">
                     </a>
-                  </li>
-              </div>
 
-            {% endfor %}
+
+
+
             </div>
           {% endfor %}
+          </div>
           <!--end of thumbnails-->
-          </ul>
+
+
           <!--begin modal window-->
           <div class="modal fade" id="myModal">
             <div class="modal-dialog">

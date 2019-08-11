@@ -42,8 +42,7 @@ twig:
     globals:
         kernelRootDir: "%kernel.root_dir%"
     form_themes:
-      - 'bootstrap_3_layout.html.twig'
-
+        - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
 # Doctrine Configuration
 doctrine:
     dbal:
