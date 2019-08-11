@@ -38,12 +38,12 @@ class AccueilController extends Controller
     public function accueilValidateAction(Request $request){
       $em = $this->getDoctrine()->getManager();
       $accueilRepository = $em->getRepository('PRVitrineBundle:Accueil');
-      $accueil = $accueilRepository->findBy(1);
+      $accueil = $accueilRepository->find(1);
       $contenu = $request->request->get('form')['Contenu'];
 
       if ($request->request->get('action')== 'Valider'){
-        $acceuil->setContenu($contenu);
-        $em->persist($acceuil);
+        $accueil->setContenu($contenu);
+        $em->persist($accueil);
         $em->flush();
         $request->getSession()->getFlashBag()->add('success', "La mise a jour de l'accueil a été effectuée");
       }else{
@@ -52,7 +52,7 @@ class AccueilController extends Controller
 
 
 
-      $formBuilder = $this->createFormBuilder($acceuil)
+      $formBuilder = $this->createFormBuilder($accueil)
                           ->add('Contenu',  CKEditorType::Class);
 
       $form= $formBuilder->getForm();

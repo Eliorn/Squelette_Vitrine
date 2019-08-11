@@ -1,5 +1,6 @@
 *{
 	font-family:Oswald;
+	font-size:18px;
 }
 
 body {
@@ -172,9 +173,17 @@ button.list-group-item:focus{
 	background-color:#222222;
 	color:white;
 	text-transform:uppercase;
+	width: 100%
+  max-width: inherit;
+  height: 100%;
+
 
 
 }
+
+
+
+
 
 .content-wrapper{
 	background-color:#111111 !important;
@@ -197,9 +206,14 @@ button.list-group-item:focus{
 	border-color: green;
 }
 
+.modal-dialog{
+		width:fit-content;
+}
+
 .modal-content{
-	height:98%;
-	width:92%;
+
+	height:fit-content;
+	width:fit-content;
 	background-color: #111111 !important;
 }
 
@@ -219,4 +233,24 @@ button.list-group-item:focus{
 	opacity: 1;
 	text-shadow: none;
 	color:white;
+}
+
+.img_crop{
+ height:200px;
+ width: 300px;
+ overflow:hidden;
+}
+.img-thumbnail{
+	padding:0 !important;
+	border-radius:0 !important;
+	border: none !important;
+	width:100%;
+	height:auto;
+
+}
+
+.grid-container{
+	display: grid;;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	grid-gap:1em;
 }

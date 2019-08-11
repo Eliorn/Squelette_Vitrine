@@ -21,7 +21,7 @@ class GalleryController extends Controller
     {
       $em = $this->getDoctrine()->getManager();
       $galleryRepository = $em->getRepository('PRVitrineBundle:Gallery');
-      $this->gallerySynchronise();
+    //  $this->gallerySynchronise();
       $listGalleries = $galleryRepository->findAll();
       return $this->render('PRAdminBundle:Admin:gallery.html.twig', array(
                 'listGalleries' => $listGalleries,
