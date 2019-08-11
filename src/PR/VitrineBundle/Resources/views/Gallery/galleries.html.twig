@@ -17,7 +17,7 @@
             {% for gallery in galleries %}
             <div class="col-lg-4"  style='float:left; text-align:left;'>
               <span style='text-align:center;text-transform:uppercase;'>{{gallery.Title}}</span><br/>
-              <a href="{{ path('gallery_show', {'gallery': gallery.directory}) }}" data-slide-to="0"><img class="img-thumbnail" src="{{asset("data/galleries/"~ gallery.directory ~"/first.jpg")}}" alt="{{gallery.caption}}"> </a> <br>
+              <a href="{{ path('gallery_show', {'gallery': gallery.directory}) }}" data-slide-to="0"><img class="img-thumbnail" style='width:250px;' src="{{asset("data/galleries/"~ gallery.directory ~"/thumbnail.jpg")}}" alt="{{gallery.caption}}"> </a> <br>
                 <caption>{{gallery.description}}</caption>
             </div>
             {% endfor %}
