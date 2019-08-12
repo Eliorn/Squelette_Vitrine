@@ -23,7 +23,7 @@ class GalleryController extends Controller
 
     $queryListGalleries = $galleriesRepository->createQueryBuilder('a')
                           ->where('a.id > -1')
-                          ->orderBy('a.title','DESC');
+                          ->orderBy('a.title','ASC');
     $query = $queryListGalleries->getQuery();
     $listGalleries = $query->getResult();
 
@@ -50,9 +50,10 @@ class GalleryController extends Controller
     $queryListImg->setParameters(array(1 => $galleryDirectoryWeb));
     $query = $queryListImg->getQuery();
     $listImg = $query->getResult();
-
     return $this->render('PRVitrineBundle:Gallery:gallery_detail.html.twig',array(
+      $galleryTitle= $galleriesRepository->findOneBy(['directory' => $galleryName])->getTitle();
               'galleryName' => $galleryName,
+              'galleryTitle' => $galleryTitle,
               'galleryDirectory' => $galleryDirectoryWeb,
               'galleryList' => $listImg
             ));
