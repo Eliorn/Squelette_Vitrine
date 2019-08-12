@@ -50,8 +50,9 @@ class GalleryController extends Controller
     $queryListImg->setParameters(array(1 => $galleryDirectoryWeb));
     $query = $queryListImg->getQuery();
     $listImg = $query->getResult();
+        $galleryTitle= $galleriesRepository->findOneBy(['directory' => $galleryName])->getTitle();
     return $this->render('PRVitrineBundle:Gallery:gallery_detail.html.twig',array(
-      $galleryTitle= $galleriesRepository->findOneBy(['directory' => $galleryName])->getTitle();
+
               'galleryName' => $galleryName,
               'galleryTitle' => $galleryTitle,
               'galleryDirectory' => $galleryDirectoryWeb,
