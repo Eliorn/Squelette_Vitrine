@@ -51,6 +51,13 @@ class Gallery
 
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="order", type="integer")
+     */
+    private $order;
+
+    /**
      * Get id
      *
      * @return int
@@ -155,5 +162,27 @@ class Gallery
     {
         return $this->directory;
     }
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function setOrder($order)
+    {
+        $this->order = $order;
+        return $this;
+    }
+
 }
 

@@ -3,12 +3,20 @@
 {% block title %}Actualités{% endblock %}
 {% block head %}
     {{ parent() }}
-    <style type="text/css">
-        .important { color: #336699; }
-    </style>
+   
 {% endblock %}
 {% block pr_vitrine_body %}
 <script src="{{asset('AdminLTE/bower_components/jquery/dist/jquery.min.js')}}"></script>
+ <style type="text/css">
+        .important { color: #336699; }
+
+        @media screen and (max-width: 768px) {
+          img{
+            max-height:300px !important;
+            max-width:300px !important;
+          }
+        }
+    </style>
 <h2> Actu du moment  </h2><br/>
 <div class="row">
 
@@ -20,7 +28,7 @@
       <div class="separator" style='margin-bottom:5px;' > &nbsp;</div>
       <span>{{article.content|raw}}</span>
       <div class="separator" style='margin-bottom:5px;' > &nbsp;</div>
-      Posté par : {{article.editor}} le : {{article.date|date('d-m-Y H:i:s') }}
+      Posté par : {{article.editor}} le : {{article.date|date('d-m-Y H:i') }}
     </div>
 
     <div class="separator" style='margin-bottom:25px; border-bottom:1px solid #888888;'> &nbsp;</div>

@@ -3,20 +3,29 @@
 {% block title %}Contacts{% endblock %}
 {% block head %}
     {{ parent() }}
-    <style type="text/css">
-        .important { color: #336699; }
-    </style>
+
 {% endblock %}
 {% block pr_vitrine_body %}
+<style type="text/css">
+    .important { color: #336699; }
+    label { margin-right: 10px;
+            font-weight: 100 !important;
+
+          }
+    select { color: black !important; }
+    #form div { margin-bottom : 15px; color:black;}
+    #form label { color: white;}
+
+</style>
     <h1>Contact</h1>
 
     <div class="col-lg-3">&nbsp;</div>
     <div class="col-lg-6">
-      <form action="{{ path('gestion_contact') }}" method="post"  >
+      <form action="{{ path('gestion_contact') }}" method="post" style='text-align:left;' >
           {{ form_widget(form)}}
 
           {{ form_rest(form)}}
-        <input name='envoyer' class='btn btn-info' type='submit' value='Envoyer' /> 
+        <input name='envoyer' class='btn btn-info' type='submit' value='Envoyer' />
       </form>
     </div>
     <div class="col-lg-3">&nbsp;</div>
