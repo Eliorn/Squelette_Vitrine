@@ -1,12 +1,34 @@
+@font-face {
+ font-family: 'Barcelony';
+ src: url("Barcelony.ttf") format("truetype");
+ font-weight: normal;
+ font-style: normal;
+}
+
+@font-face {
+ font-family: 'Oswald';
+ src: url("Oswald.ttf") format("truetype");
+ font-weight: normal;
+ font-style: normal;
+}
+
+@font-face {
+	font-family: 'Papyrus';
+	src: url("Papyrus.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+   }
+
+
 *{
-	font-family:Oswald;
+	font-family:Papyrus;
 	font-size:18px;
 }
 
 body {
 margin:auto;
 text-align:center;
-background-color:grey !important;
+background-color:#111111 !important;
 color:white;
 }
 
@@ -54,6 +76,18 @@ color:white;
 
 footer {
 	text-align : center;
+	font-size: 12px;
+	overflow-y: hidden;
+
+}
+
+footer div{
+	font-size: 12px !important;
+
+}
+footer div a{
+	font-size: 12px !important;
+
 }
 
 .dataTable {
@@ -153,17 +187,38 @@ button.list-group-item:focus{
 
 	height:auto;
 	max-height: 259px;
-	width:auto;
 	background-color:#111111;
 	background-image: url('../img/banniere.jpg');
-	background-size: 100%;
 	background-repeat: no-repeat;
-	background-position: center;
+	background-position: left;
 	text-align:center;
 	line-height:259px;
 	color:white;
 	text-transform:uppercase;
+	-webkit-background-size: cover; /* pour anciens Chrome et Safari */
+  background-size: cover; /* version standardisée */
 
+
+}
+
+@media screen and (max-width: 768px) {
+
+	#pr_banniere{
+		height:auto;
+		max-height: 75px;
+		background-color:#111111;
+		background-image: url('../img/banniere.jpg');
+		background-position: left;
+		text-align:left;
+		line-height:75px;
+		color:white;
+		text-transform:uppercase;
+		-webkit-background-size: cover; /* pour anciens Chrome et Safari */
+		background-size: cover; /* version standardisée */
+		margin-left:0px;
+		margin-right:0px;
+
+	}
 
 }
 
@@ -174,16 +229,17 @@ button.list-group-item:focus{
 	color:white;
 	text-transform:uppercase;
 	width: 100%
-  max-width: inherit;
-  height: 100%;
-
-
-
+	max-width:inherit;
+	height: 100%;
 }
 
+#pr_menu a{
+	font-family:Oswald !important;
+}
 
-
-
+.wrapper{
+	background-color:#111111 !important;
+}
 
 .content-wrapper{
 	background-color:#111111 !important;
@@ -240,6 +296,7 @@ button.list-group-item:focus{
  width: 300px;
  overflow:hidden;
 }
+
 .img-thumbnail{
 	padding:0 !important;
 	border-radius:0 !important;

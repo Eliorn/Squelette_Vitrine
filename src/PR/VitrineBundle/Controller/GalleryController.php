@@ -21,7 +21,9 @@ class GalleryController extends Controller
     $em = $this->getDoctrine()->getManager();
     $galleriesRepository = $em->getRepository('PRVitrineBundle:Gallery');
 
-    $queryListGalleries = $galleriesRepository->createQueryBuilder('a')->orderBy('a.title','DESC');
+    $queryListGalleries = $galleriesRepository->createQueryBuilder('a')
+                          ->where('a.id > -1')
+                          ->orderBy('a.order','ASC');
     $query = $queryListGalleries->getQuery();
     $listGalleries = $query->getResult();
 
@@ -48,9 +50,11 @@ class GalleryController extends Controller
     $queryListImg->setParameters(array(1 => $galleryDirectoryWeb));
     $query = $queryListImg->getQuery();
     $listImg = $query->getResult();
-
+        $galleryTitle= $galleriesRepository->findOneBy(['directory' => $galleryName])->getTitle();
     return $this->render('PRVitrineBundle:Gallery:gallery_detail.html.twig',array(
+
               'galleryName' => $galleryName,
+              'galleryTitle' => $galleryTitle,
               'galleryDirectory' => $galleryDirectoryWeb,
               'galleryList' => $listImg
             ));
