@@ -19,14 +19,15 @@ class ContactController extends Controller
 
   public function contactsAction()
   {
+    
 
     $formBuilder = $this->get('form.factory')->createBuilder();
 
     $formBuilder
-      ->add('email',      TextType::class)
-      ->add('type',       ChoiceType::class, array('choices'=> array('Technique' => 'tech' , 'Administrateur du site' =>'admin' )  ))
-      ->add('subject',    TextType::class)
-      ->add('content',    TextareaType::Class);
+      ->add('Email',      TextType::class)
+      ->add('Type',       ChoiceType::class, array('choices'=> array('Administrateur du site' =>'admin','Technique' => 'tech' )  ))
+      ->add('Sujet',    TextType::class)
+      ->add('Contenu',    TextareaType::Class);
 
     $form= $formBuilder->getForm();
 
@@ -39,6 +40,7 @@ class ContactController extends Controller
   public function mentionsLegalesAction(){
     return $this->render('PRVitrineBundle:Contact:mentions.html.twig');
   }
+  
   public function contactsEnvoiAction(Request $request )
   {
 
@@ -64,10 +66,10 @@ class ContactController extends Controller
     $formBuilder = $this->get('form.factory')->createBuilder();
 
     $formBuilder
-    ->add('email',      TextType::class)
-    ->add('type',       ChoiceType::class, array('choices'=> array('Technique' => 'tech' , 'Administrateur du site' =>'admin' )  ))
-    ->add('subject',    TextType::class)
-    ->add('content',    TextareaType::class);
+    ->add('Email',      TextType::class)
+    ->add('Type',       ChoiceType::class, array('choices'=> array('Administrateur du site' =>'admin','Technique' => 'tech' )  ))
+    ->add('Sujet',    TextType::class)
+    ->add('Contenu',    TextareaType::class);
 
     $form= $formBuilder->getForm();
     $request->getSession()->getFlashBag()->add('info', "Votre email a bien été envoyé");
