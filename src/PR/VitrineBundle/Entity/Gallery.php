@@ -49,6 +49,12 @@ class Gallery
      */
     private $directory;
 
+    /**
+     * @var integer
+     * 
+     * @ORM\Column(name="GalleryOrder", type="integer")
+     */
+    private $galleryorder;
 
     /**
      * Get id
@@ -154,6 +160,28 @@ class Gallery
     public function getDirectory()
     {
         return $this->directory;
+    }
+
+
+    /**
+     * Get GalleryOrder
+     *
+     * @return integer
+     */
+    public function getGalleryOrder()
+    {
+        return $this->galleryorder;
+    }
+
+     /**
+     * Set GalleryOrder
+     *
+     * @return Gallery
+     */
+    public function setGalleryOrder($galleryorder)
+    {
+        $this->galleryorder = $galleryorder;
+        return $this;
     }
 }
 

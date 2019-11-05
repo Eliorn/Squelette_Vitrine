@@ -62,21 +62,28 @@ class GalleryController extends Controller
       $em = $this->getDoctrine()->getManager();
       $galleryRepository = $em->getRepository('PRVitrineBundle:Gallery');
       $gallery= new Gallery();
-
+      $lastOrder = $galleryRepository->getMaxOrder();
+      
+      $lastOrder = ++$lastOrder[0]['max_order'];
+     
       if ($request->request->get('action')== 'Valider'){
 
         if (is_dir($this->get('kernel')->getRootDir().'/../web/data/galleries/'.strtolower($request->request->get('form')['Title']))){
-
               $request->getSession()->getFlashBag()->add('error', "Une galerie avec le même nom existe déjà ! ");
         }else{
-          mkdir($this->get('kernel')->getRootDir().'/../web/data/galleries/'.strtolower($request->request->get('form')['Title']));
+          
 
           $gallery->setTitle($request->request->get('form')['Title']);
           $gallery->setDescription($request->request->get('form')['Description']);
           $gallery->setCaption($request->request->get('form')['Caption']);
           $gallery->setDirectory(strtolower($request->request->get('form')['Title']));
+          $gallery->setGalleryOrder($lastOrder);
+          dump($gallery);
+         
           $em->persist($gallery);
           $em->flush();
+          mkdir($this->get('kernel')->getRootDir().'/../web/data/galleries/'.strtolower($request->request->get('form')['Title']));
+
           $request->getSession()->getFlashBag()->add('success', "La création de la galerie a été effectuée");
 
         }
