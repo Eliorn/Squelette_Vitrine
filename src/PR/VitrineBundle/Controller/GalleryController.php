@@ -23,7 +23,7 @@ class GalleryController extends Controller
 
     $queryListGalleries = $galleriesRepository->createQueryBuilder('a')
                           ->where('a.id > -1')
-                          ->orderBy('a.title','ASC');
+                          ->orderBy('a.galleryorder','ASC');
     $query = $queryListGalleries->getQuery();
     $listGalleries = $query->getResult();
 
