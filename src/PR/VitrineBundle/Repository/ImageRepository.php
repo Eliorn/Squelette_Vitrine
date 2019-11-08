@@ -10,4 +10,14 @@ namespace PR\VitrineBundle\Repository;
  */
 class ImageRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function getMaxOrder($path){
+        $query = $this->createQueryBuilder('i');
+        $query->select('i, MAX(i.pictureOrder) AS max_order')
+              ->where('i.galleryPath=:path')
+              ->setParameter('path',$path);
+            
+
+        return $query->getQuery()->getResult();
+    }
 }

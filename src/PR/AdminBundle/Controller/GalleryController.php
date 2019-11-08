@@ -30,32 +30,7 @@ class GalleryController extends Controller
     }
 
 
-    private function gallerySynchronise(){
-      $em = $this->getDoctrine()->getManager();
-      $galleryRepository = $em->getRepository('PRVitrineBundle:Gallery');
-      $imageRepository = $em->getRepository('PRVitrineBundle:Image');
-      $listGalleries = $galleryRepository->findAll();
-
-      foreach ($listGalleries as $gallery) {
-        $pictureOrder=0;
-        $galleryDirectory=$this->get('kernel')->getRootDir().'/../web/data/galleries/'.$gallery->getDirectory();
-        $galleryDirectoryWeb='./data/galleries/'.$gallery->getDirectory().'/';
-        $listImg = array_diff(scandir($galleryDirectory),array('..','.'));
-        foreach ($listImg as $img){
-          $pictureOrder++;
-          $image = new Image();
-          $image->setFullPath($galleryDirectory.'/'.$img);
-          $image->setGalleryPath($galleryDirectoryWeb);
-          $image->setName($img);
-          $image->setPictureOrder($pictureOrder);
-          $image->addGallery($gallery);
-
-          $em->persist($image);
-          $em->flush();
-        }
-      }
-
-    }
+    
 
 
     public function galleryNewAction(Request $request){
@@ -78,8 +53,6 @@ class GalleryController extends Controller
           $gallery->setCaption($request->request->get('form')['Caption']);
           $gallery->setDirectory(strtolower($request->request->get('form')['Title']));
           $gallery->setGalleryOrder($lastOrder);
-          dump($gallery);
-         
           $em->persist($gallery);
           $em->flush();
           mkdir($this->get('kernel')->getRootDir().'/../web/data/galleries/'.strtolower($request->request->get('form')['Title']));
@@ -105,8 +78,6 @@ class GalleryController extends Controller
     }
 
     public function galleryDeleteAction(Request $request){
-
-
 
       return $this->render('PRAdminBundle:Admin:gallery_populate.html.twig', array(
 
@@ -172,11 +143,5 @@ class GalleryController extends Controller
 
 
     }
-
-    public function addImageToGallery(Request $request){
-
-
-    }
-
 
 }
