@@ -111,10 +111,6 @@ class GalleryController extends Controller
 
     public function galleryChangeOrderAction(Request $request){
 
-
-      dump($request);
-      
-      
       $galleryName=$request->attributes->get('galleryName');
       $imageName=$request->attributes->get('image');
       $em = $this->getDoctrine()->getManager();
@@ -132,8 +128,7 @@ class GalleryController extends Controller
       $query = $oldOrderRequest->getQuery();
       $image= $query->getResult()[0];
       $oldOrder = $image->getPictureOrder();
-      dump($query);
-     
+
       if($oldOrder < $newOrder){      
           $set = "picture_order = picture_order - 1";
           $where = "picture_order > $oldOrder and picture_order <= $newOrder and gallery_path='$galleryDirectoryWeb'";
@@ -141,13 +136,10 @@ class GalleryController extends Controller
           $set = "picture_order = picture_order + 1";
           $where = "picture_order < $oldOrder and picture_order >= $newOrder and gallery_path='$galleryDirectoryWeb'";
       }
-
       
       $query = "update image set $set where $where";
       //Now update all so between $old and $new
-
       $conn = $em->getConnection();
-
       $stmt = $conn->prepare($query);
       $stmt->execute();
 
