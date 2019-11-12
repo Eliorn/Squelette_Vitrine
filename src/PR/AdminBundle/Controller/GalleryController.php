@@ -21,8 +21,7 @@ class GalleryController extends Controller
     {
       $em = $this->getDoctrine()->getManager();
       $galleryRepository = $em->getRepository('PRVitrineBundle:Gallery');
-    //  $this->gallerySynchronise();
-      $listGalleries = $galleryRepository->findAll();
+          $listGalleries = $galleryRepository->findAll();
       return $this->render('PRAdminBundle:Admin:gallery.html.twig', array(
                 'listGalleries' => $listGalleries,
               )
@@ -102,7 +101,7 @@ class GalleryController extends Controller
       $query = $queryListImg->getQuery();
       $listImg = $query->getResult();
 
-      return $this->render('PRAdminBundle:Admin:gallery_populate.html.twig',array(
+      return $this->render('PRAdminBundle:Admin:gallery_edit.html.twig',array(
                 'galleryName' => $galleryName,
                 'galleryDirectory' => $galleryDirectoryWeb,
                 'listPictures' => $listImg
