@@ -228,7 +228,7 @@ button.list-group-item:focus{
 	background-color:#222222;
 	color:white;
 	text-transform:uppercase;
-	width: 100%
+	width: 100%;
 	max-width:inherit;
 	height: 100%;
 }
