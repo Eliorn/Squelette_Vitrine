@@ -4,9 +4,14 @@ namespace PR\AdminBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Oneup\UploaderBundle\Event\PostPersistEvent;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 use PR\VitrineBundle\Entity\Gallery;
 use PR\VitrineBundle\Entity\Image;
-use Symfony\Component\DependencyInjection\ContainerInterface; 
+
+
 
 
 class UploadListener
@@ -18,10 +23,11 @@ class UploadListener
 
     private $container;
 
-    public function __construct(ObjectManager $om , ContainerInterface $container)
+    public function __construct(ObjectManager $om , ContainerInterface $container , RouterInterface $router)
     {
         $this->om = $om;
         $this->container = $container;
+        $this->router = $router;
     }
     
     public function onUpload(PostPersistEvent $event)
@@ -30,6 +36,7 @@ class UploadListener
         $request = $event->getRequest();
      
         $url= $request->server->get("HTTP_REFERER");
+       
         if(preg_match("/\/(\w+)$/",$url,$matches))
         {
             $dirId=$matches[1];
@@ -41,9 +48,16 @@ class UploadListener
         $this->gallerySynchronise($dirId);
 
         //if everything went fine
-        $response = $event->getResponse();
-        $response['success'] = true;
+
+        $route ='admin_gallery_edit';
+        if ($route === $event->getRequest()->get('_route')) {
+            return;
+        }
+        $url = $this->router->generate($route, array('gallery' => $dirId));
+        $response = new RedirectResponse($url);
+ 
         return $response;
+        
     }
 
 

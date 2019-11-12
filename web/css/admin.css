@@ -129,24 +129,39 @@ button.list-group-item:focus{
 
 #pr_banniere{
 
-	height:150px;
-
+	height:auto;
+	max-height: 259px;
+	background-color:#111111;
+	background-image: url('../img/banniere.jpg');
+	background-repeat: no-repeat;
+	background-position: left;
 	text-align:center;
-	line-height:150px;
+	line-height:259px;
 	color:white;
 	text-transform:uppercase;
+	-webkit-background-size: cover; /* pour anciens Chrome et Safari */
+    background-size: cover; /* version standardisée */
+
 
 }
+
 
 #pr_menu{
-
-
-
+	border-top:1px solid #888888;
+	border-bottom:1px solid #888888;
+	background-color:#222222;
+	color:white;
+	text-transform:uppercase;
+	width: 100%;
+	max-width:inherit;
+	height: 100%;
 }
 
-.content-wrapper{
-
+#pr_menu a{
+	font-family:Oswald !important;
 }
+
+
 
 .main-footer{
 

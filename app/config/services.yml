@@ -16,7 +16,7 @@ services:
 
     app.upload_listener:
         class: PR\AdminBundle\EventListener\UploadListener
-        arguments: ["@doctrine.orm.entity_manager" , "@service_container"]
+        arguments: ["@doctrine.orm.entity_manager" , "@service_container" , "@router"]
         tags:
             - { name: kernel.event_listener, event: oneup_uploader.post_persist, method: onUpload }
 

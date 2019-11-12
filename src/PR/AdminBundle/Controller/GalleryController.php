@@ -78,7 +78,7 @@ class GalleryController extends Controller
 
     public function galleryDeleteAction(Request $request){
 
-      return $this->render('PRAdminBundle:Admin:gallery_populate.html.twig', array(
+      return $this->render('PRAdminBundle:Admin:gallery_edit.html.twig', array(
 
             )
       );
@@ -166,7 +166,7 @@ class GalleryController extends Controller
 
 
     public function deleteImageFromGalleryAction(Request $request){
-
+      
       $galleryName=$request->attributes->get('galleryName');
       $imageName=$request->attributes->get('image');
       $em = $this->getDoctrine()->getManager();
@@ -177,23 +177,30 @@ class GalleryController extends Controller
       $galleryDirectoryWeb='./data/galleries/'.$galleryName.'/';
 
       $imageToDel = $imageRepository->findOneBy(array('name' => $imageName, 'galleryPath' => $galleryDirectoryWeb));
+      $sortToKeep = $imageToDel->getPictureOrder();
       $em->remove($imageToDel);
       $em->flush();
       @unlink($galleryDirectory.'/'.$imageName);
-
-
+     
       $queryListImg = $imageRepository->createQueryBuilder('a')
                                       ->where('a.galleryPath=?1 ')
+                                      ->andWhere("a.pictureOrder>=?2")
                                       ->orderBy('a.pictureOrder','ASC');
-      $queryListImg->setParameters(array(1 => $galleryDirectoryWeb));
+      $queryListImg->setParameters(array(1 => $galleryDirectoryWeb , 2 => $sortToKeep));
       $query = $queryListImg->getQuery();
       $listImg = $query->getResult();
 
-      return $this->render('PRAdminBundle:Admin:gallery_populate.html.twig',array(
-                'galleryName' => $galleryName,
-                'galleryDirectory' => $galleryDirectoryWeb,
-                'listPictures' => $listImg
-              ));
+      foreach ($listImg as $imageToSort){
+        
+        $imageToSort->setPictureOrder($imageToSort->getPictureOrder()-1);
+        $em->persist($imageToSort);
+        $em->flush();
+
+      }
+
+
+      $request->getSession()->getFlashBag()->add('success', "L'image a bien été supprimée.");
+      return $this->redirectToRoute('admin_gallery_edit', ['gallery' => $galleryName]);
 
 
     }
