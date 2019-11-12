@@ -109,6 +109,69 @@ class GalleryController extends Controller
 
     }
 
+    public function galleryChangeOrderAction(Request $request){
+
+
+      dump($request);
+      
+      
+      $galleryName=$request->attributes->get('galleryName');
+      $imageName=$request->attributes->get('image');
+      $em = $this->getDoctrine()->getManager();
+      $imageRepository = $em->getRepository('PRVitrineBundle:Image');
+      $galleriesRepository = $em->getRepository('PRVitrineBundle:Gallery');
+      $galleryDirectory=$this->get('kernel')->getRootDir().'/../web/data/galleries/'.$galleryName;
+      $galleryDirectoryWeb='./data/galleries/'.$galleryName.'/';
+
+
+      $newOrder=$request->request->get('newOrder');
+      $oldOrderRequest=$imageRepository->createQueryBuilder('a')
+                                ->where('a.galleryPath=?1 ')
+                                ->andWhere('a.name=?2');
+      $oldOrderRequest->setParameters(array(1 => $galleryDirectoryWeb, 2=>$imageName)); 
+      $query = $oldOrderRequest->getQuery();
+      $image= $query->getResult()[0];
+      $oldOrder = $image->getPictureOrder();
+      dump($query);
+     
+      if($oldOrder < $newOrder){      
+          $set = "picture_order = picture_order - 1";
+          $where = "picture_order > $oldOrder and picture_order <= $newOrder and gallery_path='$galleryDirectoryWeb'";
+      }else{
+          $set = "picture_order = picture_order + 1";
+          $where = "picture_order < $oldOrder and picture_order >= $newOrder and gallery_path='$galleryDirectoryWeb'";
+      }
+
+      
+      $query = "update image set $set where $where";
+      //Now update all so between $old and $new
+
+      $conn = $em->getConnection();
+
+      $stmt = $conn->prepare($query);
+      $stmt->execute();
+
+      // update New();
+      $image->setPictureOrder($newOrder);
+      $em->persist($image);
+      $em->flush();
+      
+    
+
+      $queryListImg = $imageRepository->createQueryBuilder('a')
+                                      ->where('a.galleryPath=?1 ')
+                                      ->orderBy('a.pictureOrder','ASC');
+      $queryListImg->setParameters(array(1 => $galleryDirectoryWeb));
+      $query = $queryListImg->getQuery();
+      $listImg = $query->getResult();
+   
+      return $this->render('PRAdminBundle:Admin:gallery_edit.html.twig',array(
+                'galleryName' => $galleryName,
+                'galleryDirectory' => $galleryDirectoryWeb,
+                'listPictures' => $listImg
+              ));
+    }
+
 
     public function deleteImageFromGalleryAction(Request $request){
 
