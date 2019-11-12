@@ -42,7 +42,7 @@
               <td style='display:none'>{{picture.pictureOrder}}</td>
               <td>{{picture.name}}</td>
               <td><img class="img-thumbnail carsl" width="200px" height="200px" name='{{picture.name}}' src="{{asset(picture.galleryPath ~ picture.name )}}"></td>
-              <td><input form="changeOrder{{picture.pictureOrder}}" id='newOrder{{picture.pictureOrder}}' name='newOrder' type='number' style='width:50px;' value="{{picture.pictureOrder}}"/></td>
+              <td> <span style='display:none;'> {{picture.pictureOrder}} </span> <input form="changeOrder{{picture.pictureOrder}}" id='newOrder{{picture.pictureOrder}}' name='newOrder' type='number' style='width:50px;' value="{{picture.pictureOrder}}"/></td>
               <td>
               
                 <form id="changeOrder{{picture.pictureOrder}}" name="changeOrder{{picture.pictureOrder}}" action="{{path('admin_change_order', {'image' : picture.name , 'galleryName' : galleryName})}}" method="post"  >
