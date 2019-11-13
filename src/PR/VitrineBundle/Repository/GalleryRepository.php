@@ -10,4 +10,10 @@ namespace PR\VitrineBundle\Repository;
  */
 class GalleryRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getMaxOrder(){
+        $query = $this->createQueryBuilder('g');
+        $query->select('g, MAX(g.galleryorder) AS max_order');
+
+        return $query->getQuery()->getResult();
+    }
 }

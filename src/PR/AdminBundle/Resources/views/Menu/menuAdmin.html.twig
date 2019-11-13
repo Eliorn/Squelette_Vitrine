@@ -1,6 +1,7 @@
 {% block menu_admin %}
 <ul class="nav navbar-nav" style='color:white !important;'>
-  </li>
+  
+  <li><a href="{{path('accueil')}}"> <i class='fa fa-home' aria-hidden="true"></i> Retour au site </a></li>
   {% for itemMenu in listMenu %}
 
     <li><a href="{{ path(itemMenu.pathname) }}"><i class="{{itemMenu.icontype}}" aria-hidden="true"></i> {{itemMenu.Title}} </a></li>

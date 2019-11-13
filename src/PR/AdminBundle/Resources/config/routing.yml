@@ -66,6 +66,10 @@ admin_image_del:
     path: /galeries/delImg/{image}/{galleryName}
     defaults: { _controller: PRAdminBundle:Gallery:deleteImageFromGallery }
 
+admin_change_order:
+    path: /galeries/changeOrder/{image}/{galleryName}
+    defaults: { _controller: PRAdminBundle:Gallery:galleryChangeOrder }
+
 admin_contact:
     path: /contacts
     defaults: { _controller: PRAdminBundle:Contacts:contact }
