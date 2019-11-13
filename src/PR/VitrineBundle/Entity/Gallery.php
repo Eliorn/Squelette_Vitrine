@@ -57,13 +57,6 @@ class Gallery
     private $galleryorder;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="order", type="integer")
-     */
-    private $order;
-
-    /**
      * Get id
      *
      * @return int
