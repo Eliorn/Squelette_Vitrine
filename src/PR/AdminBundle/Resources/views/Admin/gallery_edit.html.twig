@@ -32,8 +32,9 @@
           <th style='display:none'></th>
           <th tabindex="0" rowspan="1" colspan="1"> Nom</th>
           <th tabindex="1" rowspan="1" colspan="1"> Image </th>
-          <th tabindex="2" rowspan="1" colspan="1"> Ordre d'apparition</th>
-          <th tabindex="3" rowspan="1" colspan="1"> Actions </th>
+          <th tabindex="2" rowspan="1" colspan="1"> Miniature de la gallerie </th>
+          <th tabindex="3" rowspan="1" colspan="1"> Ordre d'apparition</th>
+          <th tabindex="4" rowspan="1" colspan="1"> Actions </th>
         </thead>
         <tbody>
 
@@ -42,13 +43,24 @@
               <td style='display:none'>{{picture.pictureOrder}}</td>
               <td>{{picture.name}}</td>
               <td><img class="img-thumbnail carsl" width="200px" height="200px" name='{{picture.name}}' src="{{asset(picture.galleryPath ~ picture.name )}}"></td>
+              <td> {% if picture.name == "thumbnail.jpg" %}
+                    Oui
+              {% else %}
+                    
+              {% endif %}
+              </td>
               <td> <span style='display:none;'> {{picture.pictureOrder}} </span> <input form="changeOrder{{picture.pictureOrder}}" id='newOrder{{picture.pictureOrder}}' name='newOrder' type='number' style='width:50px;' value="{{picture.pictureOrder}}"/></td>
               <td>
               
                 <form id="changeOrder{{picture.pictureOrder}}" name="changeOrder{{picture.pictureOrder}}" action="{{path('admin_change_order', {'image' : picture.name , 'galleryName' : galleryName})}}" method="post"  >
                   <input type='submit' value="Changer l'ordre" class='btn btn-success'/>
                 </form>
+                <br/>
 
+                <form id="changeThumbnail{{picture.name}}" name="changeThumbnail{{picture.name}}" action="{{path('admin_change_thumbnail', {'image' : picture.name , 'galleryName' : galleryName})}}" method="post"  >
+                  <input type='submit' value="Passer en miniature de gallerie" class='btn btn-success'/>
+                </form>
+                </br/>
                <input type='button' onclick="$('#confirm-delete{{picture.pictureOrder}}').modal('show');"  class='btn btn-danger' name='validation' value='Supprimer' />
 
                 <div class="modal fade" id="confirm-delete{{picture.pictureOrder}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

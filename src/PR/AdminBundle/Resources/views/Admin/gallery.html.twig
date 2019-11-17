@@ -35,7 +35,7 @@
           <tr>
             <td>{{gallery.Title}}</td>
             <td>{{gallery.Description}}</td>
-            <td>{{gallery.Caption}}</td>
+            <td><img class="img-thumbnail" style='width:250px;' src="{{asset("data/galleries/"~ gallery.directory ~"/thumbnail.jpg")}}" alt="{{gallery.caption}}"></td>
             <td>{{gallery.Directory}}</td>
             <td>
               <form action="{{path('admin_gallery_edit', {'gallery' : gallery.Directory})}}" method="post"  >

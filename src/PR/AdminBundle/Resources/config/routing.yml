@@ -70,6 +70,11 @@ admin_change_order:
     path: /galeries/changeOrder/{image}/{galleryName}
     defaults: { _controller: PRAdminBundle:Gallery:galleryChangeOrder }
 
+admin_change_thumbnail:
+    path: /galeries/changeThumbnail/{image}/{galleryName}
+    defaults: { _controller: PRAdminBundle:Gallery:galleryChangeThumbnail }
+
+
 admin_contact:
     path: /contacts
     defaults: { _controller: PRAdminBundle:Contacts:contact }

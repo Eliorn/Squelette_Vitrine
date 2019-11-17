@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Forms;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -191,6 +192,55 @@ class GalleryController extends Controller
                 'listPictures' => $listImg
               ));
     }
+
+
+    public function galleryChangeThumbnailAction(Request $request){
+
+      $galleryName=$request->attributes->get('galleryName');
+      $imageName=$request->attributes->get('image');
+      $em = $this->getDoctrine()->getManager();
+      $imageRepository = $em->getRepository('PRVitrineBundle:Image');
+      $galleriesRepository = $em->getRepository('PRVitrineBundle:Gallery');
+      $galleryDirectory=$this->get('kernel')->getRootDir().'/../web/data/galleries/'.$galleryName;
+      $galleryDirectoryWeb='./data/galleries/'.$galleryName.'/';
+
+      $oldThumbnailRequest=$imageRepository->createQueryBuilder('a')
+                                ->where('a.galleryPath=?1 ')
+                                ->andWhere('a.name=?2');
+      $oldThumbnailRequest->setParameters(array(1 => $galleryDirectoryWeb, 2=>"thumbnail.jpg")); 
+      $query = $oldThumbnailRequest->getQuery();
+      $imageOldThumb= $query->getResult()[0];
+      
+      
+      $newThumbnailRequest=$imageRepository->createQueryBuilder('a')
+                                ->where('a.galleryPath=?1 ')
+                                ->andWhere('a.name=?2');
+      $newThumbnailRequest->setParameters(array(1 => $galleryDirectoryWeb, 2=>$imageName)); 
+      $query = $newThumbnailRequest->getQuery();
+      $imageNewThumb= $query->getResult()[0];
+      
+      $oldName=$imageNewThumb->getName();
+
+
+
+      $filesystem = new Filesystem();
+
+      $filesystem->rename($galleryDirectoryWeb."thumbnail.jpg",$galleryDirectoryWeb."thumbnail_old.jpg");
+      $filesystem->rename($galleryDirectoryWeb.$oldName,$galleryDirectoryWeb."thumbnail.jpg");
+      $filesystem->rename($galleryDirectoryWeb."thumbnail_old.jpg",$galleryDirectoryWeb.$oldName);
+      // update
+      $imageNewThumb->setName("thumbnail.jpg"); 
+      $imageOldThumb->setName($oldName);
+      $em->persist($imageOldThumb);
+      $em->persist($imageNewThumb);
+      $em->flush();
+      
+    
+
+      $request->getSession()->getFlashBag()->add('success', "La miniature de la galerie a bien été modifiée.<br/> Il faut rafraichir le cache navigateur ( Ctrl + F5 ) pour bien la voir apparaitre.");
+      return $this->redirectToRoute('admin_gallery'); 
+    }
+
 
 
     public function deleteImageFromGalleryAction(Request $request){
