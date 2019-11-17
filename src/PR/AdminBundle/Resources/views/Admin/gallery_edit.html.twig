@@ -56,10 +56,20 @@
                   <input type='submit' value="Changer l'ordre" class='btn btn-success'/>
                 </form>
                 <br/>
+                {% if picture.name == "thumbnail.jpg" %}
 
+                <form id="changeThumbnail{{picture.name}}" name="changeThumbnail{{picture.name}}" action="{{path('admin_change_thumbnail', {'image' : picture.name , 'galleryName' : galleryName})}}" method="post"  >
+                  <input type='submit' disabled value="Déja une miniature" class='btn btn-success'/>
+                </form>
+
+
+                {% else %}
+                  
                 <form id="changeThumbnail{{picture.name}}" name="changeThumbnail{{picture.name}}" action="{{path('admin_change_thumbnail', {'image' : picture.name , 'galleryName' : galleryName})}}" method="post"  >
                   <input type='submit' value="Passer en miniature de gallerie" class='btn btn-success'/>
                 </form>
+
+                {% endif %}
                 </br/>
                <input type='button' onclick="$('#confirm-delete{{picture.pictureOrder}}').modal('show');"  class='btn btn-danger' name='validation' value='Supprimer' />
 
