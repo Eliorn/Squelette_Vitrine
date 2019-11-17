@@ -58,8 +58,8 @@ admin_gallery_edit:
     path: /galeries/edit/{gallery}
     defaults: { _controller: PRAdminBundle:Gallery:galleryEdit }
 
-admin_gallery_delete:
-    path: /galeries/delete/{id}
+admin_gallery_del:
+    path: /galeries/delete/{galleryName}
     defaults: { _controller: PRAdminBundle:Gallery:galleryDelete }
 
 admin_image_del:

@@ -130,13 +130,13 @@ button.list-group-item:focus{
 #pr_banniere{
 
 	height:auto;
-	max-height: 259px;
+	max-height: 150px;
 	background-color:#111111;
 	background-image: url('../img/banniere.jpg');
 	background-repeat: no-repeat;
 	background-position: left;
 	text-align:center;
-	line-height:259px;
+	line-height:150px;
 	color:white;
 	text-transform:uppercase;
 	-webkit-background-size: cover; /* pour anciens Chrome et Safari */

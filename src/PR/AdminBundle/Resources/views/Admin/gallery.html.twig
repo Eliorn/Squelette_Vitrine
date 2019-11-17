@@ -41,7 +41,35 @@
               <form action="{{path('admin_gallery_edit', {'gallery' : gallery.Directory})}}" method="post"  >
                   <input type='submit' value="Modifier" class='btn btn-warning'/>
               </form>
-              <input type='button' value="Supprimer" class='btn btn-danger'/>
+              
+               <input type='button' onclick="$('#confirm-delete{{gallery.Directory}}').modal('show');"  class='btn btn-danger' name='validation' value='Supprimer' />
+
+                <div class="modal fade" id="confirm-delete{{gallery.Directory}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              Confirmation de suppression
+                          </div>
+                          <div class="modal-body">
+                              Vous allez supprimer la galerie suivante : <br/><br/>
+                              {{gallery.Title}} :  {{gallery.Description}}
+                              <br/><br/>
+                              La suppression est irreversible, et supprimera tout le contenu de celle ci , merci de confirmer !
+
+                          </div>
+
+                          <div class="modal-footer">
+                             <form id="modal_js_confirm" name="modal_js_confirm" action="{{path('admin_gallery_del', {'galleryName' : gallery.Title})}}" method="post"  >
+                                <input type='submit' value="Supprimer" class='btn btn-danger'/>
+                             </form>
+
+                             <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+   
+                            </form>
+                          </div>
+                      </div>
+                  </div>
+                </div>
              </td>
           </tr>
           {% endfor %}

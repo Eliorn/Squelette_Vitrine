@@ -27,6 +27,7 @@
 
 body {
 margin:auto;
+min-height:100vh !important;
 text-align:center;
 background-color:#111111 !important;
 color:white;
@@ -78,6 +79,8 @@ footer {
 	text-align : center;
 	font-size: 12px;
 	overflow-y: hidden;
+	height:30px !important;
+
 
 }
 
@@ -192,7 +195,7 @@ button.list-group-item:focus{
 	background-repeat: no-repeat;
 	background-position: left;
 	text-align:center;
-	line-height:259px;
+	line-height:200px;
 	color:white;
 	text-transform:uppercase;
 	-webkit-background-size: cover; /* pour anciens Chrome et Safari */
@@ -230,7 +233,7 @@ button.list-group-item:focus{
 	text-transform:uppercase;
 	width: 100%;
 	max-width:inherit;
-	height: 100%;
+	max-height:20px;
 }
 
 #pr_menu a{
@@ -243,12 +246,15 @@ button.list-group-item:focus{
 
 .content-wrapper{
 	background-color:#111111 !important;
+
+
 }
 
 .main-footer{
 	background-color:#111111 !important;
 	color:white;
 	font-style:italic;
+	max-height:30px;
 }
 
 

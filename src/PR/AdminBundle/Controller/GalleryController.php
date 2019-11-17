@@ -77,11 +77,39 @@ class GalleryController extends Controller
     }
 
     public function galleryDeleteAction(Request $request){
+       
 
-      return $this->render('PRAdminBundle:Admin:gallery_edit.html.twig', array(
+      $galleryName=$request->attributes->get('galleryName');
 
-            )
-      );
+      $em = $this->getDoctrine()->getManager();
+      $imageRepository = $em->getRepository('PRVitrineBundle:Image');
+      $galleriesRepository = $em->getRepository('PRVitrineBundle:Gallery');
+
+      $galleryDirectory=$this->get('kernel')->getRootDir().'/../web/data/galleries/'.$galleryName;
+      $galleryDirectoryWeb='./data/galleries/'.$galleryName.'/';
+
+      $galleryToDelete = $galleriesRepository->findOneBy(["title" => $galleryName]);
+
+      $queryListImg = $imageRepository->createQueryBuilder('a')
+                                      ->where('a.galleryPath=?1 ')
+                                      ->orderBy('a.pictureOrder','ASC');
+      $queryListImg->setParameters(array(1 => $galleryDirectoryWeb));
+      $query = $queryListImg->getQuery();
+      $listImg = $query->getResult();
+
+      foreach ($listImg as $imageToDel){
+        $em->remove($imageToDel);
+        $em->flush();
+        @unlink($galleryDirectory.'/'.$imageName);
+      }
+      
+      $em->remove($galleryToDelete);
+      $em->flush();
+
+      @unlink($galleryDirectory);
+
+      $request->getSession()->getFlashBag()->add('success', "La galerie a bien été supprimée.");
+      return $this->redirectToRoute('admin_gallery'); 
     }
 
 
