@@ -222,6 +222,16 @@ button.list-group-item:focus{
 		margin-right:0px;
 
 	}
+	#pr_menu{
+		border-top:1px solid #888888;
+		border-bottom:1px solid #888888;
+		background-color:#222222;
+		color:white;
+		text-transform:uppercase;
+		width: 100%;
+		max-width:inherit;
+		max-height: none;
+	}
 
 }
 
