@@ -56,6 +56,7 @@ class GalleryController extends Controller
           $em->persist($gallery);
           $em->flush();
           mkdir($this->get('kernel')->getRootDir().'/../web/data/galleries/'.strtolower($request->request->get('form')['Title']));
+         
 
           $request->getSession()->getFlashBag()->add('success', "La création de la galerie a été effectuée");
 
@@ -195,7 +196,7 @@ class GalleryController extends Controller
 
 
     public function galleryChangeThumbnailAction(Request $request){
-
+      $new = true;
       $galleryName=$request->attributes->get('galleryName');
       $imageName=$request->attributes->get('image');
       $em = $this->getDoctrine()->getManager();
@@ -209,9 +210,11 @@ class GalleryController extends Controller
                                 ->andWhere('a.name=?2');
       $oldThumbnailRequest->setParameters(array(1 => $galleryDirectoryWeb, 2=>"thumbnail.jpg")); 
       $query = $oldThumbnailRequest->getQuery();
+      if (isset($query->getResult()[0])){
+
       $imageOldThumb= $query->getResult()[0];
-      
-      
+      $new = false;
+      }
       $newThumbnailRequest=$imageRepository->createQueryBuilder('a')
                                 ->where('a.galleryPath=?1 ')
                                 ->andWhere('a.name=?2');
@@ -221,19 +224,29 @@ class GalleryController extends Controller
       
       $oldName=$imageNewThumb->getName();
 
+      if ($new){
+        $filesystem = new Filesystem();
+        $filesystem->rename($galleryDirectoryWeb.$oldName,$galleryDirectoryWeb."thumbnail.jpg");
+        // update
+        $imageNewThumb->setName("thumbnail.jpg"); 
+        $em->persist($imageNewThumb);
+        $em->flush();
 
+      }else{
 
-      $filesystem = new Filesystem();
+        $filesystem = new Filesystem();
 
-      $filesystem->rename($galleryDirectoryWeb."thumbnail.jpg",$galleryDirectoryWeb."thumbnail_old.jpg");
-      $filesystem->rename($galleryDirectoryWeb.$oldName,$galleryDirectoryWeb."thumbnail.jpg");
-      $filesystem->rename($galleryDirectoryWeb."thumbnail_old.jpg",$galleryDirectoryWeb.$oldName);
-      // update
-      $imageNewThumb->setName("thumbnail.jpg"); 
-      $imageOldThumb->setName($oldName);
-      $em->persist($imageOldThumb);
-      $em->persist($imageNewThumb);
-      $em->flush();
+        $filesystem->rename($galleryDirectoryWeb."thumbnail.jpg",$galleryDirectoryWeb."thumbnail_old.jpg");
+        $filesystem->rename($galleryDirectoryWeb.$oldName,$galleryDirectoryWeb."thumbnail.jpg");
+        $filesystem->rename($galleryDirectoryWeb."thumbnail_old.jpg",$galleryDirectoryWeb.$oldName);
+        // update
+        $imageNewThumb->setName("thumbnail.jpg"); 
+        $imageOldThumb->setName($oldName);
+        $em->persist($imageOldThumb);
+        $em->persist($imageNewThumb);
+        $em->flush();
+      }
+
       
     
 
